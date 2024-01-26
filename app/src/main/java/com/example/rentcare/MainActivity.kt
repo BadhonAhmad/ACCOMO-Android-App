@@ -14,6 +14,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             navController = rememberNavController()
             SetUpNavGraph(navController = navController)
+
         }
     }
 }

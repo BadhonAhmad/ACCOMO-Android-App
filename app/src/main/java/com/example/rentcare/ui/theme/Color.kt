@@ -32,3 +32,5 @@ val Orchid = Color(0xFFDA70D6)
 val DarkSlateBlue = Color(0xFF483D8B)
 val OliveDrab = Color(0xFF6B8E23)
 val MediumTurquoise = Color(0xFF48D1CC)
+val SkyBlue = Color(0xFF87CEEB)
+
