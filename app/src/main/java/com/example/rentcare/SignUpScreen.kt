@@ -41,7 +41,9 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import coil.compose.rememberImagePainter
+import com.example.rentcare.Components.CButton
 import com.example.rentcare.Components.CTextField
+import com.example.rentcare.ui.theme.DarkSlateBlue
 import com.example.rentcare.ui.theme.Indigo
 import com.example.rentcare.ui.theme.SkyBlue
 
@@ -49,40 +51,45 @@ import com.example.rentcare.ui.theme.SkyBlue
 fun SignUpScreen(navController: NavController) {
     Surface(
         color = SkyBlue,
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier.fillMaxSize(),
     ) {
-        Box(modifier = Modifier.fillMaxSize()){
-            Image(painter = painterResource(id = R.drawable.sign_up_back),
+        Box() {
+            Image(
+                painter = painterResource(id = R.drawable.sign_up_back),
                 contentDescription = null,
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(190.dp)
                     .align(Alignment.TopCenter)
             )
-
-            Column(){
+        }
+        Box(modifier = Modifier.fillMaxSize()) {
+            Column() {
                 Text(
-                    text = "Rent Care",
+                    text = "Sign Up",
                     style = TextStyle(
                         fontSize = 30.sp,
                         fontFamily = FontFamily.SansSerif,
                         fontWeight = FontWeight(500),
                         color = Indigo
                     ),
-                    modifier = Modifier.align(Alignment.Start)
-                )
-                Spacer(modifier = Modifier.height(120.dp))
-                Text(
-                    text = "Sign Up",
-                    style = TextStyle(
-                        fontSize = 25.sp,
-                        fontFamily = FontFamily.SansSerif,
-                        fontWeight = FontWeight(500),
-                        color = Color.Blue
-                    ),
                     modifier = Modifier.align(Alignment.CenterHorizontally)
                 )
+                Spacer(modifier = Modifier.height(120.dp))
+
+//                Text(
+//                    text = "Sign Up",
+//                    style = TextStyle(
+//                        fontSize = 25.sp,
+//                        fontFamily = FontFamily.SansSerif,
+//                        fontWeight = FontWeight(500),
+//                        color = Color.Blue
+//                    ),
+//                    modifier = Modifier.align(Alignment.CenterHorizontally)
+//                )
             }
+        }
+        Box(){
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier
@@ -99,6 +106,25 @@ fun SignUpScreen(navController: NavController) {
                     CTextField(hint = "password", value = "")
                     CTextField(hint = "Confirm password", value = "")
                     CTextField(hint = "NID number", value = "")
+                    CButton(text = "Sign Up")
+                    Row(modifier = Modifier.padding(top = 12.dp,bottom = 40.dp)) {
+                        Text("Already have an account?",
+                            style = TextStyle(
+                                fontSize = 18.sp,
+                                color = Color.Black
+                            )
+                        )
+                        Text("Sign in",
+                            style= TextStyle(
+                                fontSize = 18.sp,
+                                fontWeight = FontWeight(800),
+                                color = Color.Black
+                            ),
+                            modifier = Modifier.clickable {
+                                navController.navigate(route = Screen.Login.route)
+                            }
+                        )
+                    }
 
                 }
         }
@@ -112,7 +138,7 @@ fun ProfileImage() {
         if(imageUri.value.isEmpty())
             R.drawable.ic_image
         else
-        imageUri.value
+            imageUri.value
     )
     val launcher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.GetContent()
