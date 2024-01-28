@@ -37,7 +37,7 @@ fun CButton(
             text = text,
             style = TextStyle(
                 fontSize = 22.sp,
-                fontWeight = FontWeight.W200,
+                fontWeight = FontWeight(500),
                 color = Color.White
             )
         )

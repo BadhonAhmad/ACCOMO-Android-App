@@ -1,14 +1,32 @@
 package com.example.rentcare.Components
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Email
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -21,39 +39,42 @@ import com.example.rentcare.ui.theme.Teal
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CTextField(
+    modifier : Modifier = Modifier,
     onValueChange : (String) -> Unit ={
-
     },
     hint : String,
-    value : String,
+    leadingIcon: ImageVector? = null
+
 ) {
-    TextField(
-        value = value,
-        onValueChange = onValueChange,
-        placeholder = {
-            Text(
-                text = hint,
-                style = TextStyle(
-                    fontSize = 18.sp,
-                    color = Color.DarkGray,
-                    fontWeight = FontWeight.SemiBold
-                )
-            )
-        },
+    Column(
         modifier = Modifier
-            .fillMaxWidth()
-            .padding(bottom = 8.dp),
-        colors = TextFieldDefaults.textFieldColors(
-            containerColor = Color.Transparent,
-            focusedIndicatorColor = Teal,
-            unfocusedIndicatorColor = DeepIndigo
+            .fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ){
+        var text by remember { mutableStateOf("") }
+        OutlinedTextField(
+            value = text,
+            modifier = Modifier
+                .background(Color.White) // Set white background
+                .padding(16.dp),
+            onValueChange = {newText ->
+                text = newText
+            },
+            label = {
+                Text(text = hint)
+            },
+            leadingIcon = {
+                leadingIcon?.let { icon ->
+                    IconButton(onClick = {}) {
+                        Icon(
+                            imageVector = icon,
+                            contentDescription = null
+                        )
+                    }
+                }
+            }
+
         )
-
-    )
-}
-
-@Preview(showBackground = true, showSystemUi = true)
-@Composable
-fun CTextFieldPreview(){
-    CTextField(hint = "email", value = "hello")
+    }
 }

@@ -28,14 +28,15 @@ fun DropDown() {
         mutableStateOf("")
     }
     Box(
-
+        modifier = Modifier
+            .fillMaxWidth()
     ) {
         ExposedDropdownMenuBox(
             expanded = isExpanded,
             onExpandedChange = {
                 isExpanded = it
             },
-            modifier = Modifier.width(400.dp)
+
             ) {
             TextField(
                 value = stat,
@@ -64,7 +65,6 @@ fun DropDown() {
                     text = {
                         Text(text = "Flat Owner")
                     },
-
                     onClick = {
                         stat = "Flat Owner"
                         isExpanded = false

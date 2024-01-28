@@ -14,7 +14,10 @@ import androidx.compose.ui.text.TextStyle
 fun LoginTextField(
     modifier : Modifier = Modifier,
     label : String,
-    trailing : String
+    trailing : String,
+    onValueChange : (String) -> Unit ={
+
+    },
 ) {
     TextField(
         modifier = modifier,
@@ -25,7 +28,9 @@ fun LoginTextField(
         },
         colors = TextFieldDefaults.textFieldColors(),
         trailingIcon ={
-            TextButton(onClick = { /*TODO*/ }) {
+            TextButton(onClick = {
+
+            }) {
                 Text(
                     text = trailing
                 )

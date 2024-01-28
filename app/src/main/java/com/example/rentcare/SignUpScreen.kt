@@ -21,12 +21,23 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.Call
+import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.LocationOn
+import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material3.Card
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -49,6 +60,14 @@ import com.example.rentcare.ui.theme.SkyBlue
 
 @Composable
 fun SignUpScreen(navController: NavController) {
+    var nam by remember { mutableStateOf("") }
+    var address by remember { mutableStateOf("") }
+    var email by remember { mutableStateOf("") }
+    var mobile by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
+    var con_password by remember { mutableStateOf("") }
+    var nid by remember { mutableStateOf("") }
+
     Surface(
         color = SkyBlue,
         modifier = Modifier.fillMaxSize(),
@@ -76,17 +95,6 @@ fun SignUpScreen(navController: NavController) {
                     modifier = Modifier.align(Alignment.CenterHorizontally)
                 )
                 Spacer(modifier = Modifier.height(120.dp))
-
-//                Text(
-//                    text = "Sign Up",
-//                    style = TextStyle(
-//                        fontSize = 25.sp,
-//                        fontFamily = FontFamily.SansSerif,
-//                        fontWeight = FontWeight(500),
-//                        color = Color.Blue
-//                    ),
-//                    modifier = Modifier.align(Alignment.CenterHorizontally)
-//                )
             }
         }
         Box(){
@@ -99,14 +107,52 @@ fun SignUpScreen(navController: NavController) {
                         .verticalScroll(rememberScrollState())
                 ) {
                     ProfileImage()
-                    CTextField(hint = "Name", value = "")
-                    CTextField(hint = "Address", value = "")
-                    CTextField(hint = "Email", value = "")
-                    CTextField(hint = "Mobile", value = "")
-                    CTextField(hint = "password", value = "")
-                    CTextField(hint = "Confirm password", value = "")
-                    CTextField(hint = "NID number", value = "")
-                    CButton(text = "Sign Up")
+                    CTextField(
+                        hint = "Name",
+
+                        onValueChange = {
+                            nam = it
+                        },
+                        leadingIcon = Icons.Filled.AccountCircle
+                    )
+                    CTextField(hint = "Address",
+                        onValueChange = {
+                            address = it
+                        },
+                        leadingIcon = Icons.Filled.LocationOn
+                    )
+                    CTextField(hint = "Email",
+                        onValueChange = {
+                            email = it
+                        },
+                        leadingIcon = Icons.Filled.Email
+                    )
+                    CTextField(
+                        hint = "Mobile",
+                        onValueChange = {
+                            mobile = it
+                        },
+                        leadingIcon = Icons.Filled.Call
+                    )
+                    CTextField(hint = "password",
+                        onValueChange = {
+                            password = it
+                        },
+                        leadingIcon = Icons.Filled.Lock
+                    )
+                    CTextField(hint = "Confirm password",
+                        onValueChange = {
+                            con_password = it
+                        },
+                        leadingIcon = Icons.Filled.Lock
+                    )
+                    CTextField(hint = "NID number",
+                        onValueChange = {
+                            nid = it
+                        },
+                        leadingIcon = Icons.Filled.Info
+                    )
+                    CButton(text = "Sign Up", onClick = {})
                     Row(modifier = Modifier.padding(top = 12.dp,bottom = 40.dp)) {
                         Text("Already have an account?",
                             style = TextStyle(
@@ -121,11 +167,14 @@ fun SignUpScreen(navController: NavController) {
                                 color = Color.Black
                             ),
                             modifier = Modifier.clickable {
-                                navController.navigate(route = Screen.Login.route)
+                                navController.navigate(Screen.Login.route){
+                                    popUpTo(Screen.Login.route){
+                                        inclusive = true
+                                    }
+                                }
                             }
                         )
                     }
-
                 }
         }
     }

@@ -37,5 +37,4 @@ fun SetUpNavGraph(
            SignUpScreen(navController)
        }
    }
-
 }
