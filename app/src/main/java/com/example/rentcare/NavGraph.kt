@@ -13,7 +13,7 @@ fun SetUpNavGraph(
 ) {
    NavHost(navController = navController,
        //Ekhane start e jar route thakbe seta theke shuru hobe tai welcome
-        startDestination = Screen.Welcome.route
+        startDestination = Screen.HomePage.route
        ){
        composable(
            route = Screen.Welcome.route

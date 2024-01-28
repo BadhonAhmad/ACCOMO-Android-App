@@ -155,7 +155,13 @@ fun SignUpScreen(navController: NavController) {
                         },
                         leadingIcon = Icons.Filled.Info
                     )
-                    CButton(text = "Sign Up", onClick = {})
+                    CButton(text = "Sign Up", onClick = {
+                        navController.navigate(Screen.HomePage.route){
+                            popUpTo(Screen.HomePage.route){
+                                inclusive = true
+                            }
+                        }
+                    })
                     Row(modifier = Modifier.padding(top = 12.dp,bottom = 40.dp)) {
                         Text("Already have an account?",
                             style = TextStyle(
