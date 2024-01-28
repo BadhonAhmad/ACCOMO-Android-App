@@ -57,7 +57,7 @@ fun CTextField(
             value = text,
             modifier = Modifier
                 .background(Color.White) // Set white background
-                .padding(16.dp),
+                .padding(start=16.dp, bottom = 4.dp, end = 16.dp),
             onValueChange = {newText ->
                 text = newText
             },

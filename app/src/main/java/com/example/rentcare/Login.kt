@@ -164,7 +164,6 @@ fun LoginScreen(navController : NavController) {
                                   inclusive = true
                               }
                           }
-
                 },
                 shape = RoundedCornerShape(4.dp),
                 colors = ButtonDefaults.buttonColors(Color.Black)
@@ -172,7 +171,7 @@ fun LoginScreen(navController : NavController) {
                 Text(text = "Create an  Account",
                     fontWeight = FontWeight.Bold,
                             color = Color.White
-                    )
+                )
             }
 
         }

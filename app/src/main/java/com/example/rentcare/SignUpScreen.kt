@@ -72,18 +72,21 @@ fun SignUpScreen(navController: NavController) {
         color = SkyBlue,
         modifier = Modifier.fillMaxSize(),
     ) {
+//        Box() {
+////            Image(
+////                painter = painterResource(id = R.drawable.sign_up_back),
+////                contentDescription = null,
+////                modifier = Modifier
+////                    .fillMaxWidth()
+////                    .height(190.dp)
+////                    .align(Alignment.TopCenter)
+////            )
+//        }
         Box() {
-            Image(
-                painter = painterResource(id = R.drawable.sign_up_back),
-                contentDescription = null,
+            Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(190.dp)
-                    .align(Alignment.TopCenter)
-            )
-        }
-        Box(modifier = Modifier.fillMaxSize()) {
-            Column() {
+            ) {
                 Text(
                     text = "Sign Up",
                     style = TextStyle(
@@ -92,9 +95,10 @@ fun SignUpScreen(navController: NavController) {
                         fontWeight = FontWeight(500),
                         color = Indigo
                     ),
+
                     modifier = Modifier.align(Alignment.CenterHorizontally)
                 )
-                Spacer(modifier = Modifier.height(120.dp))
+                //Spacer(modifier = Modifier.height(120.dp))
             }
         }
         Box(){
@@ -102,14 +106,13 @@ fun SignUpScreen(navController: NavController) {
                     horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(top = 175.dp)
-                        .padding(horizontal = 24.dp)
+                        .padding(horizontal = 16.dp)
+                        .padding(top = 50.dp)
                         .verticalScroll(rememberScrollState())
                 ) {
                     ProfileImage()
                     CTextField(
                         hint = "Name",
-
                         onValueChange = {
                             nam = it
                         },
