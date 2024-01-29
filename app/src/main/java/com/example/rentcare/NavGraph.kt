@@ -11,30 +11,15 @@ import androidx.navigation.compose.composable
 fun SetUpNavGraph(
     navController: NavHostController
 ) {
-   NavHost(navController = navController,
-       //Ekhane start e jar route thakbe seta theke shuru hobe tai welcome
-        startDestination = Screen.HomePage.route
-       ){
-       composable(
-           route = Screen.Welcome.route
-       ){
-           Welcome(navController)
-       }
-       composable(
-           route = Screen.Login.route
-       ){
-           LoginScreen(navController)
-       }
-
-       composable(
-           route = Screen.Profile.route
-       ){
-           Profile(navController)
-       }
-       composable(
-           route = Screen.SignUpScreen.route
-       ){
-           SignUpScreen(navController)
-       }
-   }
+    NavHost(
+        navController = navController,
+        //Ekhane start e jar route thakbe seta theke shuru hobe tai welcome
+        startDestination = Screen.Welcome.route
+    ){
+        composable(route = Screen.Welcome.route){ Welcome(navController) }
+        composable(route = Screen.Login.route){ LoginScreen(navController) }
+        composable(route = Screen.Profile.route){ Profile(navController) }
+        composable(route = Screen.SignUpScreen.route){ SignUpScreen(navController) }
+        composable(route = Screen.HomePage.route){ HomePage(navController) }
+    }
 }

@@ -72,16 +72,16 @@ fun SignUpScreen(navController: NavController) {
         color = SkyBlue,
         modifier = Modifier.fillMaxSize(),
     ) {
-//        Box() {
-////            Image(
-////                painter = painterResource(id = R.drawable.sign_up_back),
-////                contentDescription = null,
-////                modifier = Modifier
-////                    .fillMaxWidth()
-////                    .height(190.dp)
-////                    .align(Alignment.TopCenter)
-////            )
-//        }
+        Box(
+            modifier = Modifier.fillMaxSize()
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.trees) ,
+                contentDescription = null,
+                contentScale = ContentScale.FillBounds,
+                modifier = Modifier.matchParentSize()
+            )
+        }
         Box() {
             Column(
                 modifier = Modifier
@@ -229,6 +229,9 @@ fun ProfileImage() {
     }
 
 }
-
-
+//@Preview(showSystemUi = ture,)
+//@Composable
+//fun SignUpScreenP(navController: NavController) {
+//    SignUpScreenP(navController = NavController())
+//}
 
