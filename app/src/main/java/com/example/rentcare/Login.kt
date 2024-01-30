@@ -30,10 +30,13 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.rentcare.Components.CTextField
 import com.example.rentcare.DropDown
-import com.example.rentcare.Screen
+import com.example.rentcare.Graphs.AuthScreen
+
 
 @Composable
-fun LoginScreen(navController : NavController) {
+fun Login(
+    navController : NavController,
+    ) {
     val gradientColorList = listOf(
         Color(0xFFD0BCFF),
         Color(0xFFEFB8C8),
@@ -156,8 +159,8 @@ fun LoginScreen(navController : NavController) {
                     .height(40.dp)
                     .padding(horizontal = 16.dp),
                 onClick = {
-                          navController.navigate(Screen.SignUpScreen.route){
-                              popUpTo(Screen.SignUpScreen.route){
+                          navController.navigate(AuthScreen.SignUpScreen.route){
+                              popUpTo(AuthScreen.SignUpScreen.route){
                                   inclusive = true
                               }
                           }

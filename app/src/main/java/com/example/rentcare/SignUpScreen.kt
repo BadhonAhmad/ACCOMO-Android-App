@@ -54,6 +54,8 @@ import coil.compose.rememberAsyncImagePainter
 import coil.compose.rememberImagePainter
 import com.example.rentcare.Components.CButton
 import com.example.rentcare.Components.CTextField
+import com.example.rentcare.Graphs.AuthScreen
+import com.example.rentcare.Graphs.HomeNavGraph
 import com.example.rentcare.ui.theme.DarkSlateBlue
 import com.example.rentcare.ui.theme.Indigo
 import com.example.rentcare.ui.theme.SkyBlue
@@ -156,12 +158,13 @@ fun SignUpScreen(navController: NavController) {
                         leadingIcon = Icons.Filled.Info
                     )
                     CButton(text = "Sign Up", onClick = {
-                        navController.navigate(BottomBarScreen.Home.route){
-                            popUpTo(BottomBarScreen.Home.route){
-                                inclusive = true
-                            }
-                        }
-                    })
+//                        navController.navigate(HomePage(navController:)){
+//                            popUpTo(BottomBarScreen.Home.route){
+//                                inclusive = true
+//                            }
+//                        }
+//                        HomeNavGraph(navController:rememberNavController())
+                    })//program randomly memory location kore, but stack counter por por data rakhe
                     Row(modifier = Modifier.padding(top = 12.dp,bottom = 40.dp)) {
                         Text("Already have an account?",
                             style = TextStyle(
@@ -176,8 +179,8 @@ fun SignUpScreen(navController: NavController) {
                                 color = Color.Black
                             ),
                             modifier = Modifier.clickable {
-                                navController.navigate(Screen.Login.route){
-                                    popUpTo(Screen.Login.route){
+                                navController.navigate(AuthScreen.Login.route){
+                                    popUpTo(AuthScreen.Login.route){
                                         inclusive = true
                                     }
                                 }

@@ -31,12 +31,12 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.rentcare.Graphs.AuthScreen
 
 @Composable
 fun Welcome(
@@ -100,15 +100,15 @@ fun Welcome(
         Button(
             modifier = Modifier.fillMaxWidth(),
             onClick = {
-                navController.navigate(route = Screen.Login.route)
+                navController.navigate(route = AuthScreen.Login.route)
             }){
             Text(text= "Get Started!")
         }
     }
 }
 
-@Composable
-@Preview(showBackground = true, showSystemUi = true)
-fun WelcomePreview(){
-        Welcome(navController = rememberNavController())
-}
+//@Composable
+//@Preview(showBackground = true, showSystemUi = true)
+//fun WelcomePreview(){
+//        Welcome(navController = rememberNavController())
+//}
