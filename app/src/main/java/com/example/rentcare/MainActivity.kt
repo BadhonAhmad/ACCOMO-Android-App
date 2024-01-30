@@ -40,25 +40,13 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-//            navController = rememberNavController()
-//            SetUpNavGraph(navController = navController)
-            MainScreen()
+            navController = rememberNavController()
+            SetUpNavGraph(navController = navController)
+
         }
     }
 }
 
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun MainScreen() {
-    val navController = rememberNavController()
-
-    // Other content of your main screen
-    // ...
-
-    // Call the BottomNavigationBar composable
-    BottomNavigationBar()
-}
 
 /*
 1.make all the screens individually

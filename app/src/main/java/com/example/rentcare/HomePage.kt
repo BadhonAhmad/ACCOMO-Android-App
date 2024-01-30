@@ -24,7 +24,6 @@ import com.example.rentcare.ui.theme.SkyBlue
 
 @Composable
 fun HomePage(navController: NavController){
-
     Surface(
         color = SkyBlue,
         modifier = Modifier.fillMaxSize(),
@@ -39,8 +38,8 @@ fun HomePage(navController: NavController){
                 modifier = Modifier.matchParentSize()
             )
         }
-        BottomNavigationBar()
     }
+    BottomNav()
 }
 
 //@Preview(showSystemUi = true, showBackground = true)

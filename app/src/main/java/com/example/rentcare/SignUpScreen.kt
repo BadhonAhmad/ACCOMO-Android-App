@@ -156,8 +156,8 @@ fun SignUpScreen(navController: NavController) {
                         leadingIcon = Icons.Filled.Info
                     )
                     CButton(text = "Sign Up", onClick = {
-                        navController.navigate(Screen.HomePage.route){
-                            popUpTo(Screen.HomePage.route){
+                        navController.navigate(BottomBarScreen.Home.route){
+                            popUpTo(BottomBarScreen.Home.route){
                                 inclusive = true
                             }
                         }

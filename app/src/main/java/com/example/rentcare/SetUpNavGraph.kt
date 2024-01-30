@@ -2,7 +2,6 @@ package com.example.rentcare
 
 import LoginScreen
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -16,10 +15,11 @@ fun SetUpNavGraph(
         //Ekhane start e jar route thakbe seta theke shuru hobe tai welcome
         startDestination = Screen.Welcome.route
     ){
-        composable(route = Screen.Welcome.route){ Welcome(navController) }
-        composable(route = Screen.Login.route){ LoginScreen(navController) }
-        composable(route = Screen.Profile.route){ Profile(navController) }
-        composable(route = Screen.SignUpScreen.route){ SignUpScreen(navController) }
-        composable(route = Screen.HomePage.route){ HomePage(navController) }
+        composable(route = "Welcome_screen"){ Welcome(navController) }
+        composable(route = "Login_screen"){ LoginScreen(navController) }
+        composable(route = "Signup_screen"){ SignUpScreen(navController)}
+        composable(route = "profile"){ Profile(navController) }
+        composable(route = "home"){ HomePage(navController) }
+        composable(route = "notifications"){ Notifications(navController)}
     }
 }
