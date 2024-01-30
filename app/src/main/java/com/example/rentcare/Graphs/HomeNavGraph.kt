@@ -16,9 +16,9 @@ fun HomeNavGraph(navController: NavHostController) {
     NavHost(
         navController = navController,
         route = Graph.HOME,
-        startDestination = AuthScreen.Home.route
+        startDestination = BottomBarScreen.Home.route
     ) {
-        composable(route = AuthScreen.Home.route) {
+        composable(route = BottomBarScreen.Home.route) {
 //            ScreenContent(
 //                name = BottomBarScreen.Home.route,
 //                onClick = {
