@@ -46,7 +46,8 @@ fun Profile(navController: NavController) {
             )
             Text(
                 text = "Save",
-                modifier = Modifier.clickable { notification.value = "Profile updated"
+                modifier = Modifier.clickable {
+                    notification.value = "Profile updated"
                 }
             )
         }

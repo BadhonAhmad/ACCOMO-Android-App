@@ -4,20 +4,15 @@ import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
@@ -25,7 +20,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Call
 import androidx.compose.material.icons.filled.Email
-import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Lock
@@ -40,7 +34,6 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -50,18 +43,16 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import coil.compose.rememberAsyncImagePainter
 import coil.compose.rememberImagePainter
 import com.example.rentcare.Components.CButton
 import com.example.rentcare.Components.CTextField
-import com.example.rentcare.Graphs.AuthScreen
-import com.example.rentcare.Graphs.HomeNavGraph
-import com.example.rentcare.ui.theme.DarkSlateBlue
 import com.example.rentcare.ui.theme.Indigo
 import com.example.rentcare.ui.theme.SkyBlue
 
 @Composable
-fun SignUpScreen(navController: NavController) {
+fun SignUpScreen(
+    navController: NavController
+) {
     var nam by remember { mutableStateOf("") }
     var address by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
@@ -158,13 +149,21 @@ fun SignUpScreen(navController: NavController) {
                         leadingIcon = Icons.Filled.Info
                     )
                     CButton(text = "Sign Up", onClick = {
-//                        navController.navigate(HomePage(navController:)){
-//                            popUpTo(BottomBarScreen.Home.route){
-//                                inclusive = true
-//                            }
-//                        }
-//                        HomeNavGraph(navController:rememberNavController())
-                    })//program randomly memory location kore, but stack counter por por data rakhe
+
+                    }
+
+                    )//program randomly memory location kore, but stack counter por por data rakhe
+//                    Column(
+//                        modifier = Modifier.fillMaxSize(),
+//                        verticalArrangement = Arrangement.Center,
+//                        horizontalAlignment = Alignment.CenterHorizontally
+//                    ) {
+//                        Text(
+//                            modifier = Modifier.clickable { onClick() },
+//                            text = "LOGIN",
+//                            fontWeight = FontWeight.Bold
+//                        )
+//                    }
                     Row(modifier = Modifier.padding(top = 12.dp,bottom = 40.dp)) {
                         Text("Already have an account?",
                             style = TextStyle(
@@ -179,10 +178,11 @@ fun SignUpScreen(navController: NavController) {
                                 color = Color.Black
                             ),
                             modifier = Modifier.clickable {
-                                navController.navigate(AuthScreen.Login.route){
-                                    popUpTo(AuthScreen.Login.route){
+                                navController.navigate(Screen.Login.route){
+                                    popUpTo(Screen.Login.route){
                                         inclusive = true
                                     }
+
                                 }
                             }
                         )

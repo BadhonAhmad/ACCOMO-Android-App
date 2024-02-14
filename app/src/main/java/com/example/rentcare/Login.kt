@@ -30,7 +30,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.rentcare.Components.CTextField
 import com.example.rentcare.DropDown
-import com.example.rentcare.Graphs.AuthScreen
+import com.example.rentcare.Screen
 
 
 @Composable
@@ -159,8 +159,8 @@ fun Login(
                     .height(40.dp)
                     .padding(horizontal = 16.dp),
                 onClick = {
-                          navController.navigate(AuthScreen.SignUpScreen.route){
-                              popUpTo(AuthScreen.SignUpScreen.route){
+                          navController.navigate(Screen.SignUpScreen.route){
+                              popUpTo(Screen.SignUpScreen.route){
                                   inclusive = true
                               }
                           }

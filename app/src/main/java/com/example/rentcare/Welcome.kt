@@ -36,7 +36,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.example.rentcare.Graphs.AuthScreen
 
 @Composable
 fun Welcome(
@@ -100,7 +99,7 @@ fun Welcome(
         Button(
             modifier = Modifier.fillMaxWidth(),
             onClick = {
-                navController.navigate(route = AuthScreen.Login.route)
+                navController.navigate(route = Screen.Login.route)
             }){
             Text(text= "Get Started!")
         }
