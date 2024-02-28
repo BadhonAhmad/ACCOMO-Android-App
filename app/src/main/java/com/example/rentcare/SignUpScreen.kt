@@ -76,7 +76,6 @@ fun SignUpScreen(
     //var con_password by remember { mutableStateOf("") }
     var nid = remember { mutableStateOf(TextFieldValue()) }
     Surface(
-        color = SkyBlue,
         modifier = Modifier.fillMaxSize(),
     ) {
         Box() {

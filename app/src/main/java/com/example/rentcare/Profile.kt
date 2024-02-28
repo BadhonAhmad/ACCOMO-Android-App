@@ -50,6 +50,8 @@ fun Profile(navController: NavController) {
                     notification.value = "Profile updated"
                 }
             )
+
+           Text(text = "${MainActivity.renterInfo?.name}")
         }
     }
 }

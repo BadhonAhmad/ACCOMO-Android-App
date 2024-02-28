@@ -9,6 +9,12 @@ import com.google.firebase.FirebaseApp
 
 
 class MainActivity : ComponentActivity() {
+    companion object DataManager {
+        // Variables to store student information, result list, and semester
+        var renterInfo: RenterInfo? = null
+      //  var resultList: List<Getdata>?= null
+      //  var semester:String?=null
+    }
     lateinit var navController : NavHostController
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
