@@ -36,40 +36,16 @@ import com.example.rentcare.Screen
 @Composable
 fun Login(
     navController : NavController,
-    ) {
-    val gradientColorList = listOf(
-        Color(0xFFD0BCFF),
-        Color(0xFFEFB8C8),
-        Color(0xFFCCC2DC)
-    )
+) {
     var logmail by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     Surface{//Brushing the Surface of the app
         Column(modifier = Modifier
             .fillMaxWidth()
             .fillMaxHeight()
-            .background(
-                brush = GradientBackgroundBrush(
-                    isVerticalGradient = true,
-                    colors = gradientColorList
-                )
-            )
-
+            .background(Color.White)
         ) {
-//            Box(
-//                modifier = Modifier
-//                    .fillMaxWidth()
-//                    .padding(start = 16.dp, end = 16.dp),
-//                contentAlignment = Alignment.TopStart
-//            ) {
-//                Text(
-//                    modifier = Modifier.padding(top = 40.dp),
-//                    text = "RentCare",
-//                    fontSize = 30.sp,
-//                    fontWeight = FontWeight.ExtraBold,
-//                    color = Color.Blue
-//                )
-//            }
+
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -99,14 +75,6 @@ fun Login(
                     password = it
                 }
             )
-//            Spacer(modifier = Modifier.height(20.dp))
-//            Box(
-//                modifier = Modifier
-//                    .fillMaxWidth()
-//                    .padding(horizontal = 16.dp)
-//            ){
-//
-//            }
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -159,39 +127,20 @@ fun Login(
                     .height(40.dp)
                     .padding(horizontal = 16.dp),
                 onClick = {
-                          navController.navigate(Screen.SignUpScreen.route){
-                              popUpTo(Screen.SignUpScreen.route){
-                                  inclusive = true
-                              }
-                          }
+                    navController.navigate(Screen.SignUpScreen.route){
+                        popUpTo(Screen.SignUpScreen.route){
+                            inclusive = true
+                        }
+                    }
                 },
                 shape = RoundedCornerShape(4.dp),
                 colors = ButtonDefaults.buttonColors(Color.Black)
             ){
                 Text(text = "Create an  Account",
                     fontWeight = FontWeight.Bold,
-                            color = Color.White
+                    color = Color.White
                 )
             }
-
         }
-
     }
-}
-
-@Composable
-fun GradientBackgroundBrush(
-    isVerticalGradient : Boolean,
-    colors : List<Color>
-): Brush {
-    val endOffset = if(isVerticalGradient){
-        Offset(0f,Float.POSITIVE_INFINITY)
-    }else{
-        Offset(Float.POSITIVE_INFINITY,0f)
-    }
-    return Brush.linearGradient(
-        colors = colors,
-        start = Offset.Zero,
-        end = endOffset
-    )
 }

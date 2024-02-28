@@ -10,7 +10,7 @@ import androidx.navigation.compose.composable
 @Composable
 fun SetUpNavGraph(
     navController: NavHostController
-) {
+){
     NavHost(
         navController = navController,
         //Ekhane start e jar route thakbe seta theke shuru hobe tai welcome
@@ -21,5 +21,9 @@ fun SetUpNavGraph(
         composable(route = "Signup_screen"){ SignUpScreen(navController) }
         composable(route = "profile"){ Profile(navController) }
         composable(route = "notifications"){ Notifications(navController) }
+        composable(route = "homepage"){ HomePage(navController) }
+        composable(route = "yourunit"){ YourUnit(navController) }
+        composable(route = "enterunit"){ EnterUnit(navController) }
+
     }
 }

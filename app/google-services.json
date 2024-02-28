@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "145923598233",
+    "project_id": "rentcareapp",
+    "storage_bucket": "rentcareapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:145923598233:android:0e67460add217737421508",
+        "android_client_info": {
+          "package_name": "com.example.rentcare"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAux-uy76R8iXINyUmO7lYI6-3kMdgSJcE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

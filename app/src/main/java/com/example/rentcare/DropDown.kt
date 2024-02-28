@@ -16,6 +16,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -30,6 +31,7 @@ fun DropDown() {
     Box(
         modifier = Modifier
             .fillMaxWidth()
+            .padding(16.dp)
     ) {
         ExposedDropdownMenuBox(
             expanded = isExpanded,
@@ -50,7 +52,7 @@ fun DropDown() {
             )
             ExposedDropdownMenu(
                 expanded = isExpanded,
-                onDismissRequest = { isExpanded = false },
+                onDismissRequest = { isExpanded = false }
             ) {
                 DropdownMenuItem(
                     text = {
