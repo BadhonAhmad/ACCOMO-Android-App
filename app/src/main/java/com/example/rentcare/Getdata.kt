@@ -13,3 +13,12 @@ data class RenterInfo(
     val password: String,
     val nid: String
 )
+
+data class OwnerInfo(
+    val name : String,
+    val address : String,
+    val mobile : String,
+    val email : String,
+    val bkash : String,
+    val password : String
+)

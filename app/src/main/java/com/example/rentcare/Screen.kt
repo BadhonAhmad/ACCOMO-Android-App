@@ -9,5 +9,10 @@ sealed class Screen(val route : String){
     object Notifications : Screen(route = "notifications")
     object YourUnit: Screen(route = "yourunit")
     object EnterUnit: Screen(route = "enterunit")
+    object SignUpAs : Screen(route = "signupas")
+    object FindAUnit : Screen(route = "findaunit")
+    object RentersUnitDetails:Screen(route = "rentersunitdetails")
+    object CreateFlat: Screen(route = "createflat")
+    object SignUpOwner: Screen(route = "signupowner")
 
 }

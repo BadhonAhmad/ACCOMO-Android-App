@@ -5,6 +5,7 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Query
+import java.security.acl.Owner
 
 
 interface ApiService {
@@ -18,4 +19,18 @@ interface ApiService {
         @Query("email") email:String,
         @Query("password") password:String
     ):Call<List<RenterInfo>>
+
+
+    @POST("owner")
+    fun InputOwnerInfo(
+        @Body ownerInfo : OwnerInfo
+    ):Call<Void>
+
+    @GET("ownerinfo")
+    fun GetownerInfo(
+        @Query("email") email : String,
+        @Query("password") password : String
+    ):Call<List<OwnerInfo>>
+    //make api get in vs code then connect that api via retrofit where needed
+
 }

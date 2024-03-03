@@ -1,5 +1,6 @@
 package com.example.rentcare
 
+
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -36,7 +37,28 @@ import androidx.navigation.NavController
 //import androidx.wear.compose.material.ContentAlpha
 
 @Composable
-fun EnterUnit(navController: NavController) {
+fun ClickableIcon(
+    icon: ImageVector,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+//    tint: Color = LocalContentColor.current.copy(alpha = ContentAlpha.medium)
+) {
+    IconButton(
+        onClick = onClick,
+        modifier = modifier,
+        content = {
+            Icon(
+                imageVector = icon,
+                contentDescription = null
+                //tint = tint
+            )
+        }
+    )
+}
+
+
+@Composable
+fun FindAUnit(navController: NavController) {
     val ffname = remember { mutableStateOf("") }
     val ffnumber = remember { mutableStateOf("") }
     val ffunit = remember { mutableStateOf("") }
@@ -67,7 +89,7 @@ fun EnterUnit(navController: NavController) {
                 onClick = {
                     // Handle icon click event
                 },
-                modifier = Modifier.size(50.dp)
+                modifier = Modifier.size(50.dp),
                 //tint = Color.Red
             )
 
@@ -84,6 +106,13 @@ fun EnterUnit(navController: NavController) {
         Row(
             verticalAlignment = Alignment.CenterVertically
         ){
+            Image(
+                painter = painterResource(id = R.drawable.buildingheight),
+                contentDescription = null,
+                modifier = Modifier
+
+            )
+            Spacer(modifier = Modifier.width(100.dp))
             RoundedButton(
                 modifier = Modifier.padding(top = 40.dp,end = 16.dp),
                 text = "Create Apartment",

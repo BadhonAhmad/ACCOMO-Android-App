@@ -12,8 +12,10 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
@@ -83,6 +85,7 @@ fun SignUpScreen(
                 modifier = Modifier
                     .fillMaxWidth()
             ) {
+                Spacer(modifier = Modifier.height(80.dp))
                 Text(
                     text = "Sign Up",
                     style = TextStyle(
@@ -97,6 +100,7 @@ fun SignUpScreen(
             }
         }
         Box(){
+
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier
@@ -105,12 +109,12 @@ fun SignUpScreen(
                         .padding(top = 50.dp)
                         .verticalScroll(rememberScrollState())
                 ) {
-                    ProfileImage()
+                    Spacer(modifier = Modifier.height(110.dp))
                     OutlinedTextField(
                         value =nam.value ,
                         onValueChange ={ nam.value=it},
                         singleLine = true,
-                        label = { Text(text = "Enter your name") },
+                        label = { Text(text = "Name") },
                         //colors = TextFieldDefaults.colors(),
                         modifier= Modifier
                             .fillMaxWidth()
@@ -122,7 +126,7 @@ fun SignUpScreen(
                         value =address.value ,
                         onValueChange ={ address.value=it},
                         singleLine = true,
-                        label = { Text(text = "Enter your name") },
+                        label = { Text(text = "Address") },
                         //colors = TextFieldDefaults.colors(),
                         modifier= Modifier
                             .fillMaxWidth()
@@ -134,7 +138,7 @@ fun SignUpScreen(
                         value =email.value ,
                         onValueChange ={ email.value=it},
                         singleLine = true,
-                        label = { Text(text = "Enter your name") },
+                        label = { Text(text = "Email") },
                         //colors = TextFieldDefaults.colors(),
                         modifier= Modifier
                             .fillMaxWidth()
@@ -146,7 +150,7 @@ fun SignUpScreen(
                         value =mobile.value ,
                         onValueChange ={ mobile.value=it},
                         singleLine = true,
-                        label = { Text(text = "Enter your name") },
+                        label = { Text(text = "Mobile") },
                         //colors = TextFieldDefaults.colors(),
                         modifier= Modifier
                             .fillMaxWidth()
@@ -158,7 +162,7 @@ fun SignUpScreen(
                         value =password.value ,
                         onValueChange ={ password.value=it},
                         singleLine = true,
-                        label = { Text(text = "Enter your name") },
+                        label = { Text(text = "Password") },
                         //colors = TextFieldDefaults.colors(),
                         modifier= Modifier
                             .fillMaxWidth()
@@ -170,7 +174,7 @@ fun SignUpScreen(
                             value =nid.value ,
                     onValueChange ={ nid.value=it},
                     singleLine = true,
-                    label = { Text(text = "Enter your name") },
+                    label = { Text(text = "NID number") },
                     //colors = TextFieldDefaults.colors(),
                     modifier= Modifier
                         .fillMaxWidth()
@@ -178,7 +182,7 @@ fun SignUpScreen(
                     shape = RoundedCornerShape(15.dp),
 
                     )
-
+                    Spacer(modifier = Modifier.height(10.dp))
                     CButton(text = "Sign Up", onClick = {
                         // Create a RenterInfo object with the entered data
                         val renterInfo = RenterInfo(
@@ -242,69 +246,9 @@ fun SignUpScreen(
     }
 }
 
-@Composable
-fun ProfileImage() {
-    val imageUri = rememberSaveable{ mutableStateOf("") }
-    val painter = rememberImagePainter(
-        if(imageUri.value.isEmpty())
-            R.drawable.ic_image
-        else
-            imageUri.value
-    )
-    val launcher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.GetContent()
-    ){
-        uri : Uri?->
-        uri ?.let{imageUri.value = it.toString()}
-    }
-    Column(
-        modifier = Modifier
-            .fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Card(shape = CircleShape,
-            modifier = Modifier
-                .padding(8.dp)
-                .size(100.dp)
-            ){
-            Image(
-                painter = painter,
-                contentDescription = null,
-                modifier = Modifier
-                    .wrapContentSize()
-                    .clickable {
-                        launcher.launch("image/*")
-                    },
-               contentScale = ContentScale.Crop
-            )
-        }
-        Text(text = "Change Profile Picture")
-    }
-
-}
-
-fun createUserInFireBase(email:String, password : String){
-    try {
-        FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    Log.d(TAG, "User created successfully")
-                } else {
-                    Log.e(TAG, "User creation failed: ${task.exception?.message}")
-                }
-            }
-    } catch (e: Exception) {
-        Log.e(TAG, "Exception during user creation: ${e.message}")
-    }
-}
 private fun showToast(context: Context, message: String) {
     Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
 }
-//@Preview(showSystemUi = ture,)
-//@Composable
-//fun SignUpScreenP(navController: NavController) {
-//    SignUpScreenP(navController = NavController())
-//}
 
 
 
