@@ -40,7 +40,7 @@ import com.example.rentcare.ui.theme.Indigo
 import com.example.rentcare.ui.theme.SkyBlue
 
 @Composable
-fun Profile(navController: NavController) {
+fun ProfileOwner(navController: NavController) {
     val notification = rememberSaveable{ mutableStateOf("") }
     if(notification.value.isNotEmpty()){
         Toast.makeText(LocalContext.current,notification.value,Toast.LENGTH_LONG).show()
@@ -80,7 +80,7 @@ fun Profile(navController: NavController) {
                     modifier = Modifier
                         .fillMaxWidth(.5f)
                         .border(2.dp, Color.Black, shape = RoundedCornerShape(8.dp)),
-                        //.background(color = Indigo, shape = RoundedCornerShape(8.dp)),
+                    //.background(color = Indigo, shape = RoundedCornerShape(8.dp)),
                     style = TextStyle(
                         fontSize = 25.sp, // Set the font size
                         fontWeight = FontWeight.Bold,
@@ -91,7 +91,7 @@ fun Profile(navController: NavController) {
         }
 
         Text(
-            text = "Name : ${MainActivity.renterInfo?.name}",
+            text = "Name : ${MainActivity.ownerInfo?.name}",
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 16.dp, end = 16.dp, top = 20.dp)
@@ -106,7 +106,7 @@ fun Profile(navController: NavController) {
             )
         )
         Text(
-            text = "Address : ${MainActivity.renterInfo?.address}",
+            text = "Address : ${MainActivity.ownerInfo?.address}",
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 16.dp, end = 16.dp, top = 8.dp)
@@ -121,22 +121,7 @@ fun Profile(navController: NavController) {
             )
         )
         Text(
-            text = "Email : ${MainActivity.renterInfo?.email}",
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(start = 16.dp, end = 16.dp, top = 8.dp)
-//                .background(color = SkyBlue,
-//                    shape = RoundedCornerShape(8.dp)) // Set the background color of the box
-                .border(2.dp, Color.White,shape = RoundedCornerShape(8.dp) ) // Set the border of the box
-                .padding(8.dp), // Add padding inside the box
-            style = TextStyle(
-                fontSize = 20.sp, // Set the font size
-                fontWeight = FontWeight.Bold,
-                color = Color.Black // Set the text color
-            )
-        )
-        Text(
-            text = "Mobile : ${MainActivity.renterInfo?.mobile}",
+            text = "Mobile : ${MainActivity.ownerInfo?.mobile}",
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 16.dp, end = 16.dp, top = 8.dp)
@@ -151,7 +136,23 @@ fun Profile(navController: NavController) {
             )
         )
         Text(
-            text = "NID number : ${MainActivity.renterInfo?.nid}",
+            text = "Email : ${MainActivity.ownerInfo?.email}",
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 16.dp, end = 16.dp, top = 8.dp)
+//                .background(color = SkyBlue,
+//                    shape = RoundedCornerShape(8.dp)) // Set the background color of the box
+                .border(2.dp, Color.White,shape = RoundedCornerShape(8.dp) ) // Set the border of the box
+                .padding(8.dp), // Add padding inside the box
+            style = TextStyle(
+                fontSize = 20.sp, // Set the font size
+                fontWeight = FontWeight.Bold,
+                color = Color.Black // Set the text color
+            )
+        )
+
+        Text(
+            text = "bkash number : ${MainActivity.ownerInfo?.bkash}",
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 16.dp, end = 16.dp, top = 8.dp)

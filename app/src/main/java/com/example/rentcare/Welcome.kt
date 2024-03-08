@@ -80,7 +80,7 @@ fun Welcome(
         )
         Spacer(modifier = Modifier.height(40.dp)) //Adds vertical space of 16 density-independent pixels (dp)
         Button(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth().background(Color.White),
             onClick = {
                 navController.navigate(route = Screen.Login.route)
             }){

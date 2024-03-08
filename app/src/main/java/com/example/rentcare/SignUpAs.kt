@@ -32,7 +32,6 @@ fun SignUpAs(
     Column(
         modifier = Modifier.background(color=Color.White)
             .fillMaxSize(),
-
         )
     {
 
@@ -82,9 +81,9 @@ fun SignUpAs(
         ) {
             RoundedButton(
                 modifier = Modifier,
-                text = "Renter",
-                buttonColor = Color.Blue,
-                textColor = Color.White,
+                text = "Tenant",
+                buttonColor = Color.White,
+                textColor = Color.Black,
                 height = 48.dp,
                 width = 200.dp,
                 onClick = {

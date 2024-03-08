@@ -5,7 +5,6 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Query
-import java.security.acl.Owner
 
 
 interface ApiService {
@@ -14,23 +13,30 @@ interface ApiService {
     fun InputRenterInfo(
         @Body renterInfo: RenterInfo // Request body containing updated RenterInfo
     ): Call<Void> // Call object to handle the response
+
+    @POST("owner")
+    fun InputOwnerInfo(
+        @Body ownerInfo: OwnerInfo // Request body containing updated RenterInfo
+    ): Call<Void>
+
+    @POST("createflat")
+    fun InputFlatInfo(
+        @Body flatInfo: FlatInfo
+    ):Call<Void>
+
     @GET("renterinfo")
     fun GetrenterInfo(
         @Query("email") email:String,
         @Query("password") password:String
     ):Call<List<RenterInfo>>
-
-
-    @POST("owner")
-    fun InputOwnerInfo(
-        @Body ownerInfo : OwnerInfo
-    ):Call<Void>
-
     @GET("ownerinfo")
-    fun GetownerInfo(
-        @Query("email") email : String,
-        @Query("password") password : String
+    fun GetOwnerInfo(
+        @Query("email") email:String,
+        @Query("password") password:String
     ):Call<List<OwnerInfo>>
-    //make api get in vs code then connect that api via retrofit where needed
 
+    @GET("flatdetails")
+    fun GetFlatDetails(
+        @Query("flatname") flatname : String
+    ):Call<List<FlatDetails>>
 }

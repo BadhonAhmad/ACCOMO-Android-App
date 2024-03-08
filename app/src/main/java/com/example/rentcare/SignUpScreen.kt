@@ -22,6 +22,8 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -40,6 +42,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -84,8 +88,8 @@ fun SignUpScreen(
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
+                    .padding(top = 10.dp)
             ) {
-                Spacer(modifier = Modifier.height(80.dp))
                 Text(
                     text = "Sign Up",
                     style = TextStyle(
@@ -99,8 +103,8 @@ fun SignUpScreen(
                 //Spacer(modifier = Modifier.height(120.dp))
             }
         }
+        Spacer(modifier = Modifier.height(20.dp))
         Box(){
-
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier
@@ -109,18 +113,20 @@ fun SignUpScreen(
                         .padding(top = 50.dp)
                         .verticalScroll(rememberScrollState())
                 ) {
-                    Spacer(modifier = Modifier.height(110.dp))
+
                     OutlinedTextField(
-                        value =nam.value ,
-                        onValueChange ={ nam.value=it},
+                        value = nam.value,
+                        onValueChange = { nam.value = it },
                         singleLine = true,
-                        label = { Text(text = "Name") },
-                        //colors = TextFieldDefaults.colors(),
-                        modifier= Modifier
+                        label = { Text(text = "Enter your name") },
+                        modifier = Modifier
                             .fillMaxWidth()
                             .padding(bottom = 5.dp, start = 10.dp, end = 10.dp),
                         shape = RoundedCornerShape(15.dp),
-
+                        keyboardOptions = KeyboardOptions(
+                            keyboardType = KeyboardType.Text,
+                            imeAction = ImeAction.Next
+                        )
                     )
                     OutlinedTextField(
                         value =address.value ,
@@ -132,8 +138,11 @@ fun SignUpScreen(
                             .fillMaxWidth()
                             .padding(bottom = 5.dp, start = 10.dp, end = 10.dp),
                         shape = RoundedCornerShape(15.dp),
-
+                        keyboardOptions = KeyboardOptions(
+                            keyboardType = KeyboardType.Text,
+                            imeAction = ImeAction.Next
                         )
+                    )
                     OutlinedTextField(
                         value =email.value ,
                         onValueChange ={ email.value=it},
@@ -144,45 +153,58 @@ fun SignUpScreen(
                             .fillMaxWidth()
                             .padding(bottom = 5.dp, start = 10.dp, end = 10.dp),
                         shape = RoundedCornerShape(15.dp),
-
+                        keyboardOptions = KeyboardOptions(
+                            keyboardType = KeyboardType.Text,
+                            imeAction = ImeAction.Next
+                        )
                         )
                     OutlinedTextField(
                         value =mobile.value ,
                         onValueChange ={ mobile.value=it},
                         singleLine = true,
-                        label = { Text(text = "Mobile") },
+                        label = { Text(text = "mobile") },
                         //colors = TextFieldDefaults.colors(),
                         modifier= Modifier
                             .fillMaxWidth()
                             .padding(bottom = 5.dp, start = 10.dp, end = 10.dp),
                         shape = RoundedCornerShape(15.dp),
-
+                        keyboardOptions = KeyboardOptions(
+                            keyboardType = KeyboardType.Text,
+                            imeAction = ImeAction.Next
+                        )
                         )
                     OutlinedTextField(
                         value =password.value ,
                         onValueChange ={ password.value=it},
                         singleLine = true,
-                        label = { Text(text = "Password") },
+                        label = { Text(text = "password") },
                         //colors = TextFieldDefaults.colors(),
                         modifier= Modifier
                             .fillMaxWidth()
                             .padding(bottom = 5.dp, start = 10.dp, end = 10.dp),
                         shape = RoundedCornerShape(15.dp),
-
+                        keyboardOptions = KeyboardOptions(
+                            keyboardType = KeyboardType.Text,
+                            imeAction = ImeAction.Next
                         )
-                    OutlinedTextField(
-                            value =nid.value ,
-                    onValueChange ={ nid.value=it},
-                    singleLine = true,
-                    label = { Text(text = "NID number") },
-                    //colors = TextFieldDefaults.colors(),
-                    modifier= Modifier
-                        .fillMaxWidth()
-                        .padding(bottom = 5.dp, start = 10.dp, end = 10.dp),
-                    shape = RoundedCornerShape(15.dp),
-
                     )
-                    Spacer(modifier = Modifier.height(10.dp))
+                    OutlinedTextField(
+                        value =nid.value ,
+                        onValueChange ={ nid.value=it},
+                        singleLine = true,
+                        label = { Text(text = "NID number") },
+                        //colors = TextFieldDefaults.colors(),
+                        modifier= Modifier
+                            .fillMaxWidth()
+                            .padding(bottom = 5.dp, start = 10.dp, end = 10.dp),
+                        shape = RoundedCornerShape(15.dp),
+                        keyboardOptions = KeyboardOptions(
+                            keyboardType = KeyboardType.Text,
+                            imeAction = ImeAction.Next
+                        )
+                    )
+
+
                     CButton(text = "Sign Up", onClick = {
                         // Create a RenterInfo object with the entered data
                         val renterInfo = RenterInfo(
@@ -217,7 +239,9 @@ fun SignUpScreen(
                             }
                         })
 
-                    })
+                    },
+                        containerColor = Indigo
+                    )
 
                     Row(modifier = Modifier.padding(top = 12.dp,bottom = 40.dp)) {
                         Text("Already have an account?",
@@ -249,6 +273,11 @@ fun SignUpScreen(
 private fun showToast(context: Context, message: String) {
     Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
 }
+//@Preview(showSystemUi = ture,)
+//@Composable
+//fun SignUpScreenP(navController: NavController) {
+//    SignUpScreenP(navController = NavController())
+//}
 
 
 

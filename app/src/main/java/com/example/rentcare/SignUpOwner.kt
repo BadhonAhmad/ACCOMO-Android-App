@@ -22,6 +22,8 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -40,6 +42,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -74,6 +78,8 @@ fun SignUpOwner(
     var mobile = remember { mutableStateOf(TextFieldValue()) }
     var email = remember { mutableStateOf(TextFieldValue()) }
     var bkash = remember { mutableStateOf(TextFieldValue()) }
+    // var password by remember { mutableStateOf("") }
+    //var con_password by remember { mutableStateOf("") }
     var password = remember { mutableStateOf(TextFieldValue()) }
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -82,8 +88,8 @@ fun SignUpOwner(
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
+                    .padding(top = 10.dp)
             ) {
-                Spacer(modifier = Modifier.height(80.dp))
                 Text(
                     text = "Sign Up",
                     style = TextStyle(
@@ -97,8 +103,8 @@ fun SignUpOwner(
                 //Spacer(modifier = Modifier.height(120.dp))
             }
         }
+        Spacer(modifier = Modifier.height(20.dp))
         Box(){
-
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier
@@ -107,22 +113,24 @@ fun SignUpOwner(
                     .padding(top = 50.dp)
                     .verticalScroll(rememberScrollState())
             ) {
-                Spacer(modifier = Modifier.height(110.dp))
+
                 OutlinedTextField(
-                    value =nam.value,
-                    onValueChange ={nam.value=it},
+                    value = nam.value,
+                    onValueChange = { nam.value = it },
                     singleLine = true,
-                    label = { Text(text = "Name") },
-                    //colors = TextFieldDefaults.colors(),
-                    modifier= Modifier
+                    label = { Text(text = "Enter your name") },
+                    modifier = Modifier
                         .fillMaxWidth()
                         .padding(bottom = 5.dp, start = 10.dp, end = 10.dp),
                     shape = RoundedCornerShape(15.dp),
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Text,
+                        imeAction = ImeAction.Next
                     )
-
+                )
                 OutlinedTextField(
-                    value =address.value,
-                    onValueChange ={ address.value = it},
+                    value =address.value ,
+                    onValueChange ={ address.value=it},
                     singleLine = true,
                     label = { Text(text = "Address") },
                     //colors = TextFieldDefaults.colors(),
@@ -130,8 +138,11 @@ fun SignUpOwner(
                         .fillMaxWidth()
                         .padding(bottom = 5.dp, start = 10.dp, end = 10.dp),
                     shape = RoundedCornerShape(15.dp),
-
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Text,
+                        imeAction = ImeAction.Next
                     )
+                )
                 OutlinedTextField(
                     value =mobile.value ,
                     onValueChange ={ mobile.value=it},
@@ -142,7 +153,11 @@ fun SignUpOwner(
                         .fillMaxWidth()
                         .padding(bottom = 5.dp, start = 10.dp, end = 10.dp),
                     shape = RoundedCornerShape(15.dp),
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Text,
+                        imeAction = ImeAction.Next
                     )
+                )
                 OutlinedTextField(
                     value =email.value ,
                     onValueChange ={ email.value=it},
@@ -153,49 +168,55 @@ fun SignUpOwner(
                         .fillMaxWidth()
                         .padding(bottom = 5.dp, start = 10.dp, end = 10.dp),
                     shape = RoundedCornerShape(15.dp),
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Text,
+                        imeAction = ImeAction.Next
                     )
+                )
                 OutlinedTextField(
                     value =bkash.value ,
                     onValueChange ={ bkash.value=it},
                     singleLine = true,
-                    label = { Text(text = "BKASH number") },
+                    label = { Text(text = "bkash number") },
                     //colors = TextFieldDefaults.colors(),
                     modifier= Modifier
                         .fillMaxWidth()
                         .padding(bottom = 5.dp, start = 10.dp, end = 10.dp),
                     shape = RoundedCornerShape(15.dp),
-
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Text,
+                        imeAction = ImeAction.Next
                     )
+                )
                 OutlinedTextField(
                     value =password.value ,
                     onValueChange ={ password.value=it},
                     singleLine = true,
-                    label = { Text(text = "Password") },
+                    label = { Text(text = "password") },
                     //colors = TextFieldDefaults.colors(),
                     modifier= Modifier
                         .fillMaxWidth()
                         .padding(bottom = 5.dp, start = 10.dp, end = 10.dp),
-                    shape = RoundedCornerShape(15.dp),
+                    shape = RoundedCornerShape(15.dp)
+                )
 
-                    )
 
-                Spacer(modifier = Modifier.height(10.dp))
                 CButton(text = "Sign Up", onClick = {
                     // Create a RenterInfo object with the entered data
                     val ownerInfo = OwnerInfo(
                         name = nam.value.text,
                         address = address.value.text,
-                        email = email.value.text,
                         mobile = mobile.value.text,
+                        email = email.value.text,
                         bkash = bkash.value.text,
-                        password = password.value.text,
+                        password = password.value.text
                     )
                     // Make the PUT request
                     apiService.InputOwnerInfo(ownerInfo).enqueue(object : Callback<Void> {
                         override fun onResponse(call: Call<Void>, response: Response<Void>) {
                             if (response.isSuccessful) {
-                                navController.navigate(Screen.FindAUnit.route){
-                                    popUpTo(Screen.FindAUnit.route){
+                                navController.navigate(Screen.FindUnit.route){
+                                    popUpTo(Screen.FindUnit.route){
                                         inclusive = true
                                     }
                                 }
@@ -213,13 +234,10 @@ fun SignUpOwner(
                             showToast(toastContext,errorMessage)
                         }
                     })
-//                    navController.navigate(Screen.FindAUnit.route){
-//                        popUpTo(Screen.FindAUnit.route){
-//                            inclusive = true
-//                        }
-//                    }
 
-                })
+                },
+                    containerColor = Indigo
+                )
 
                 Row(modifier = Modifier.padding(top = 12.dp,bottom = 40.dp)) {
                     Text("Already have an account?",
@@ -251,6 +269,11 @@ fun SignUpOwner(
 private fun showToast(context: Context, message: String) {
     Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
 }
+//@Preview(showSystemUi = ture,)
+//@Composable
+//fun SignUpScreenP(navController: NavController) {
+//    SignUpScreenP(navController = NavController())
+//}
 
 
 

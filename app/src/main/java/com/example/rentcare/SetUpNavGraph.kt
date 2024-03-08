@@ -24,10 +24,12 @@ fun SetUpNavGraph(
         composable(route = "homepage"){ HomePage(navController) }
         composable(route = "yourunit"){ YourUnit(navController) }
         composable(route = "enterunit"){ EnterUnit(navController) }
-        composable(route = "signupas"){ SignUpAs(navController)}
-        composable(route = "findaunit"){ FindAUnit(navController)}
+        composable(route = "owner"){ SignUpOwner(navController)}
+        composable(route = "signupas"){SignUpAs(navController)}
+        composable(route = "profileowner"){ ProfileOwner(navController)}
         composable(route = "createflat"){ CreateFlat(navController)}
-        composable(route = "rentersunitdetails"){ RentersUnitDetails(navController)}
-        composable(route = "signupowner"){ SignUpOwner(navController) }
+        composable(route = "flatprofile"){ FlatProfile(navController )}
+        composable(route = "findunit"){ FindUnit(navController )}
+
     }
 }
