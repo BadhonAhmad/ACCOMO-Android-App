@@ -30,6 +30,7 @@ fun SetUpNavGraph(
         composable(route = "createflat"){ CreateFlat(navController)}
         composable(route = "flatprofile"){ FlatProfile(navController )}
         composable(route = "findunit"){ FindUnit(navController )}
+        composable(route = "confrimunit"){ ConfirmUnit(navController) }
 
     }
 }

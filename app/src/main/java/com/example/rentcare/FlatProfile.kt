@@ -29,9 +29,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.rentcare.Components.CButton
 
 @Composable
@@ -52,6 +55,7 @@ fun FlatProfile(navController: NavController) {
                 .padding(8.dp),
             horizontalArrangement = Arrangement.SpaceBetween
         ){
+
             //here add the back arrow
             Icon(
                 imageVector = Icons.Default.ArrowBack, // Use the back arrow icon
@@ -71,9 +75,9 @@ fun FlatProfile(navController: NavController) {
                 contentAlignment = Alignment.Center
             ) {
                 Text(
-                    text = "Unit Details",
+                    text = "   ${MainActivity.flatInfo?.flatname} Unit Details",
                     modifier = Modifier
-                        .fillMaxWidth(.5f)
+                        .fillMaxWidth(.9f)
                         .border(2.dp, Color.Black, shape = RoundedCornerShape(8.dp)),
                     //.background(color = Indigo, shape = RoundedCornerShape(8.dp)),
                     style = TextStyle(
@@ -83,38 +87,25 @@ fun FlatProfile(navController: NavController) {
                     )
                 )
             }
-        }
 
-        Text(
-            text = "Name : ${MainActivity.flatDetails?.rent}",
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(start = 16.dp, end = 16.dp, top = 20.dp)
-//                .background(color= SkyBlue,
-//                    shape = RoundedCornerShape(8.dp)) // Set the background color of the box
-                .border(2.dp, Color.White,shape = RoundedCornerShape(8.dp) ) // Set the border of the box
-                .padding(8.dp), // Add padding inside the box
-            style = TextStyle(
-                fontSize = 20.sp, // Set the font size
-                fontWeight = FontWeight.Bold,
-                color = Color.Black // Set the text color
-            )
+        }
+        Row(
         )
-        Text(
-            text = "Address : ${MainActivity.flatDetails?.gas}",
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(start = 16.dp, end = 16.dp, top = 8.dp)
-//                .background(color= SkyBlue,
-//                    shape = RoundedCornerShape(8.dp)) // Set the background color of the box
-                .border(2.dp, Color.White,shape = RoundedCornerShape(8.dp) )// Set the border of the box
-                .padding(8.dp), // Add padding inside the box
-            style = TextStyle(
-                fontSize = 20.sp, // Set the font size
+        {
+            Text(
+                text = "Tenant Info",
+                color = Color.Blue,
+                fontSize = 30.sp,
                 fontWeight = FontWeight.Bold,
-                color = Color.Black // Set the text color
+                textAlign = TextAlign.Center,
+                modifier = Modifier.padding(
+                    start = 16.dp,
+                    end = 16.dp,
+                    top = 16.dp,
+                    bottom = 8.dp
+                )
             )
-        )
+        }
         Text(
             text = "Email : ${MainActivity.ownerInfo?.email}",
             modifier = Modifier
@@ -122,7 +113,11 @@ fun FlatProfile(navController: NavController) {
                 .padding(start = 16.dp, end = 16.dp, top = 8.dp)
 //                .background(color = SkyBlue,
 //                    shape = RoundedCornerShape(8.dp)) // Set the background color of the box
-                .border(2.dp, Color.White,shape = RoundedCornerShape(8.dp) ) // Set the border of the box
+                .border(
+                    2.dp,
+                    Color.White,
+                    shape = RoundedCornerShape(8.dp)
+                ) // Set the border of the box
                 .padding(8.dp), // Add padding inside the box
             style = TextStyle(
                 fontSize = 20.sp, // Set the font size
@@ -130,46 +125,99 @@ fun FlatProfile(navController: NavController) {
                 color = Color.Black // Set the text color
             )
         )
-//        Text(
-//            text = "Mobile : ${MainActivity.ownerInfo?.mobile}",
-//            modifier = Modifier
-//                .fillMaxWidth()
-//                .padding(start = 16.dp, end = 16.dp, top = 8.dp)
-////                .background(color = SkyBlue,
-////                    shape = RoundedCornerShape(8.dp)) // Set the background color of the box
-//                .border(2.dp, Color.White,shape = RoundedCornerShape(8.dp) )// Set the border of the box
-//                .padding(8.dp), // Add padding inside the box
-//            style = TextStyle(
-//                fontSize = 20.sp, // Set the font size
-//                fontWeight = FontWeight.Bold,
-//                color = Color.Black // Set the text color
-//            )
-//        )
-//        Text(
-//            text = "bkash number : ${MainActivity.ownerInfo?.bkash}",
-//            modifier = Modifier
-//                .fillMaxWidth()
-//                .padding(start = 16.dp, end = 16.dp, top = 8.dp)
-////                .background(
-////                    color = SkyBlue,
-////                    shape = RoundedCornerShape(8.dp) // Set the rounded corners
-////                )
-//// Set the background color of the box
-//                .border(2.dp, Color.White,shape = RoundedCornerShape(8.dp) ) // Set the border of the box
-//                .padding(8.dp), // Add padding inside the box
-//            style = TextStyle(
-//                fontSize = 20.sp, // Set the font size
-//                fontWeight = FontWeight.Bold,
-//                color = Color.Black // Set the text color
-//            )
-//        )
+        Text(
+            text = "bkash number : ${MainActivity.ownerInfo?.bkash}",
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 16.dp, end = 16.dp, top = 8.dp)
+//                .background(
+//                    color = SkyBlue,
+//                    shape = RoundedCornerShape(8.dp) // Set the rounded corners
+//                ) // Set the background color of the box
+                .border(
+                    2.dp,
+                    Color.White,
+                    shape = RoundedCornerShape(8.dp)
+                ) // Set the border of the box
+                .padding(8.dp), // Add padding inside the box
+            style = TextStyle(
+                fontSize = 20.sp, // Set the font size
+                fontWeight = FontWeight.Bold,
+                color = Color.Black // Set the text color
+            )
+        )
+        Row(
+        )
+        {
+            Text(
+                text = "Payment Status",
+                color = Color.Blue,
+                fontSize = 30.sp,
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.padding(
+                    start = 16.dp,
+                    end = 16.dp,
+                    top = 16.dp,
+                    bottom = 8.dp
+                )
+            )
+        }
+        Text(
+            text = "Rent bill: ${MainActivity.flatDetails?.rent}",
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 16.dp, end = 16.dp, top = 10.dp)
+//                .background(color= SkyBlue,
+//                    shape = RoundedCornerShape(8.dp)) // Set the background color of the box
+//                .border(
+//                    2.dp,
+//                    Col
+//                    shape = RoundedCornerShape(8.dp)
+//                ) // Set the border of the box
+                .padding(8.dp), // Add padding inside the box
+            style = TextStyle(
+                fontSize = 20.sp, // Set the font size
+                fontWeight = FontWeight.Bold,
+                color = Color.Black // Set the text color
+            )
+        )
+        Text(
+            text = "Gas and others : ${MainActivity.flatDetails?.gas}",
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 16.dp, end = 16.dp, top = 8.dp)
+//                .background(color= SkyBlue,
+//                    shape = RoundedCornerShape(8.dp)) // Set the background color of the box
+//                .border(
+//                    2.dp,
+//                    Color.White,
+//                    shape = RoundedCornerShape(8.dp)
+//                )// Set the border of the box
+                .padding(8.dp), // Add padding inside the box
+            style = TextStyle(
+                fontSize = 20.sp, // Set the font size
+                fontWeight = FontWeight.Bold,
+                color = Color.Black // Set the text color
+            )
+        )
+
         Spacer(modifier = Modifier.height(20.dp))
-        CButton(text = "Log Out", onClick = {
+        CButton(text = "Mark As Paid", onClick = {
             navController.navigate(Screen.Login.route) {
                 popUpTo(Screen.Login.route) {
                     inclusive = true
                 }
             }
-        })
+        },
+            containerColor = Color.Green
+        )
     }
+}
+
+@Preview(showSystemUi = true, showBackground = true)
+@Composable
+fun FlatPre() {
+    val navController = rememberNavController()
+    FlatProfile(navController)
 }

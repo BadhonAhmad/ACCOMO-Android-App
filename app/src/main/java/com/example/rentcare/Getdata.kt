@@ -15,22 +15,40 @@ data class RenterInfo(
 )
 data class OwnerInfo(
     val name : String,
-    val address : String,
-    val mobile : String,
-    val email : String,
-    val bkash : String,
+    var address : String,
+    var mobile : String,
+    var email : String,
+    var bkash : String,
     val password : String
 )
 data class FlatInfo (//owner, flatname, floor,unit, rent, gas
-        val owner : String,
-        val flatname : String,
-        val floor : Int,
-        val unit : Int,
+    val owner : String,
+    val flatname : String,
+    val floor : Int,
+    val unit : Int,
     val rent : Int,
     val gas : Int
 )
 data class FlatDetails(
     val code : String,
-  val rent : Int,
+    val rent : Int,
     val gas : Int
+)
+
+data class UnitDetails(
+    val name : String,
+    val email : String,
+    val bkash : String,
+    val flatname : String,
+    val rent : Int,
+    val gas : Int
+)
+data class RentedFlats(
+    var tenant : String,
+    var email : String,
+    var mobile : String,
+    var nid : String,
+    var flatname : String,
+    var rent : Int,
+    var gas : Int
 )

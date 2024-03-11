@@ -215,6 +215,11 @@ fun SignUpOwner(
                     apiService.InputOwnerInfo(ownerInfo).enqueue(object : Callback<Void> {
                         override fun onResponse(call: Call<Void>, response: Response<Void>) {
                             if (response.isSuccessful) {
+                                ownerInfo.email = email.value.text
+                                ownerInfo.mobile = mobile.value.text
+                                ownerInfo.bkash = bkash.value.text
+                                ownerInfo.address = address.value.text
+
                                 navController.navigate(Screen.FindUnit.route){
                                     popUpTo(Screen.FindUnit.route){
                                         inclusive = true
@@ -234,6 +239,7 @@ fun SignUpOwner(
                             showToast(toastContext,errorMessage)
                         }
                     })
+
 
                 },
                     containerColor = Indigo

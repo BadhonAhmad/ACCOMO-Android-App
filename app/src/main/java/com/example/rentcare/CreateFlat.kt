@@ -53,7 +53,7 @@ fun CreateFlat(navController: NavController) {
             .build()
             .create(ApiService::class.java)
     }
-    val femail = MainActivity.ownerInfo?.email ?: ""
+    var femail = MainActivity.ownerInfo?.email ?: ""
     var fname = remember { mutableStateOf(TextFieldValue()) }
     val nfloor = remember { mutableStateOf(TextFieldValue()) }
     val nunit = remember { mutableStateOf(TextFieldValue()) }

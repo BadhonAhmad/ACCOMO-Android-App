@@ -95,7 +95,7 @@ fun FindUnit(navController: NavController) {
             Text(
                 text = "Home Page",
                 color = Color.Blue,
-                fontSize = 10.sp,
+                fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
                 textAlign = TextAlign.Center,
                 modifier = Modifier.padding(

@@ -15,5 +15,6 @@ sealed class Screen(val route : String){
     object CreateFlat : Screen(route =  "createflat")
     object FlatProfile : Screen(route = "flatprofile")
     object FindUnit : Screen(route = "findunit")
+    object ConfirmUnit : Screen(route = "confrimunit")
 
 }

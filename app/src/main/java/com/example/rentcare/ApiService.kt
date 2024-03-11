@@ -19,6 +19,11 @@ interface ApiService {
         @Body ownerInfo: OwnerInfo // Request body containing updated RenterInfo
     ): Call<Void>
 
+    @POST("rented_flats")
+    fun InputRentedFlats(
+        @Body rentedFlats: RentedFlats
+    ):Call < Void >
+
     @POST("createflat")
     fun InputFlatInfo(
         @Body flatInfo: FlatInfo
@@ -39,4 +44,10 @@ interface ApiService {
     fun GetFlatDetails(
         @Query("flatname") flatname : String
     ):Call<List<FlatDetails>>
+
+    @GET("unitdetails")
+    fun GetUnitDetails(
+        @Query("code") code : String
+    ):Call<List<UnitDetails>>
+
 }

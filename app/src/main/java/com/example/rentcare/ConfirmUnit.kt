@@ -1,8 +1,7 @@
 package com.example.rentcare
 
-
+import android.content.Context
 import android.widget.Toast
-import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -23,6 +22,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -30,15 +30,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.example.rentcare.Components.CButton
+import com.example.rentcare.MainActivity.DataManager.rentedFlats
 import com.example.rentcare.ui.theme.Indigo
-import com.example.rentcare.ui.theme.SkyBlue
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -46,13 +45,28 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 @Composable
-fun YourUnit(navController: NavController) {
+fun ConfirmUnit(navController: NavController) {
+    val toastContext = LocalContext.current
     val notification = rememberSaveable{ mutableStateOf("") }
+
+    val BASE_URL = "http://192.168.43.186:5001/"
+    val apiService: ApiService by lazy {
+        Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(ApiService::class.java)
+    }// var femail = MainActivity.ownerInfo?.email ?: ""
+
+    var flatname = MainActivity.unitDetails?.flatname?:""
+    // var password by remember { mutableStateOf("") }
+    //var con_password by remember { mutableStateOf("") }
+    var rent = MainActivity.unitDetails?.rent?:""
+    var gas = MainActivity.unitDetails?.gas?:""
     if(notification.value.isNotEmpty()){
-        Toast.makeText(LocalContext.current,notification.value,Toast.LENGTH_LONG).show()
+        Toast.makeText(LocalContext.current,notification.value, Toast.LENGTH_LONG).show()
         notification.value = ""
     }
-
     Column(
         modifier = Modifier
             .verticalScroll(rememberScrollState())
@@ -73,33 +87,31 @@ fun YourUnit(navController: NavController) {
                     .size(24.dp) // Set the size of the icon
                     .clickable {
                         // Handle back arrow click action (e.g., navigate back)
-                        navController.navigate(Screen.FindUnit.route) {
-                            popUpTo(Screen.FindUnit.route) {
+                        navController.navigate(Screen.EnterUnit.route) {
+                            popUpTo(Screen.EnterUnit.route) {
                                 inclusive = true
                             }
                         }
                     }
             )
-
             Box(
                 contentAlignment = Alignment.Center
             ) {
                 Text(
-                    text = "   ${MainActivity.unitDetails?.flatname} Unit Details",
+                    text = "   ${MainActivity.unitDetails ?. flatname} ",
                     modifier = Modifier
                         .fillMaxWidth(.9f)
-                        .border(2.dp, Color.Blue, shape = RoundedCornerShape(8.dp)),
+                        .border(2.dp, Color.Black, shape = RoundedCornerShape(8.dp)),
                     //.background(color = Indigo, shape = RoundedCornerShape(8.dp)),
                     style = TextStyle(
                         fontSize = 25.sp, // Set the font size
                         fontWeight = FontWeight.Bold,
-                        color = Color.Blue // Set the text color
+                        color = Color.Black // Set the text color
                     )
                 )
             }
 
         }
-
         Row(
         )
         {
@@ -141,25 +153,6 @@ fun YourUnit(navController: NavController) {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 16.dp, end = 16.dp, top = 8.dp)
-//                .background(color = SkyBlue,
-//                    shape = RoundedCornerShape(8.dp)) // Set the background color of the box
-                .border(
-                    2.dp,
-                    Color.White,
-                    shape = RoundedCornerShape(8.dp)
-                ) // Set the border of the box
-                .padding(8.dp), // Add padding inside the box
-            style = TextStyle(
-                fontSize = 20.sp, // Set the font size
-                fontWeight = FontWeight.Bold,
-                color = Color.Black // Set the text color
-            )
-        )
-        Text(
-            text = "bkash number : ${MainActivity.unitDetails?.bkash}",
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(start = 16.dp, end = 16.dp, top = 8.dp)
 //                .background(
 //                    color = SkyBlue,
 //                    shape = RoundedCornerShape(8.dp) // Set the rounded corners
@@ -176,35 +169,18 @@ fun YourUnit(navController: NavController) {
                 color = Color.Black // Set the text color
             )
         )
-        Row(
-        )
-        {
-            Text(
-                text = "Payment Status",
-                color = Indigo,
-                fontSize = 30.sp,
-                fontWeight = FontWeight.Bold,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.padding(
-                    start = 16.dp,
-                    end = 16.dp,
-                    top = 16.dp,
-                    bottom = 8.dp
-                )
-            )
-        }
         Text(
-            text = "Rent Bill : ${MainActivity.unitDetails?.rent}",
+            text = "Rent bill: ${MainActivity.unitDetails?.rent}",
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(start = 16.dp, end = 16.dp, top = 20.dp)
+                .padding(start = 16.dp, end = 16.dp, top = 10.dp)
 //                .background(color= SkyBlue,
 //                    shape = RoundedCornerShape(8.dp)) // Set the background color of the box
-                .border(
-                    2.dp,
-                    Color.White,
-                    shape = RoundedCornerShape(8.dp)
-                ) // Set the border of the box
+//                .border(
+//                    2.dp,
+//                    Col
+//                    shape = RoundedCornerShape(8.dp)
+//                ) // Set the border of the box
                 .padding(8.dp), // Add padding inside the box
             style = TextStyle(
                 fontSize = 20.sp, // Set the font size
@@ -217,13 +193,6 @@ fun YourUnit(navController: NavController) {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 16.dp, end = 16.dp, top = 8.dp)
-//                .background(color= SkyBlue,
-//                    shape = RoundedCornerShape(8.dp)) // Set the background color of the box
-                .border(
-                    2.dp,
-                    Color.White,
-                    shape = RoundedCornerShape(8.dp)
-                )// Set the border of the box
                 .padding(8.dp), // Add padding inside the box
             style = TextStyle(
                 fontSize = 20.sp, // Set the font size
@@ -232,65 +201,48 @@ fun YourUnit(navController: NavController) {
             )
         )
 
-        BillStatusBox(isPaid = false, modifier = Modifier.align(Alignment.CenterHorizontally))
-        CButton(text = "Pay Now", onClick = {
+        Spacer(modifier = Modifier.height(20.dp))
+        CButton(text = "Confirm", onClick = {
+
+            val rentedFlats = RentedFlats(
+                tenant = MainActivity.renterInfo?.name?:"",
+                email =MainActivity.renterInfo?.email?:"",
+                mobile =MainActivity.renterInfo?.mobile?:"",
+                nid = MainActivity.renterInfo?.nid?:"",
+                flatname = flatname,
+                rent = rent as Int,
+                gas = gas as Int
+            )
+            // Make the PUT request
+            apiService.InputRentedFlats(rentedFlats).enqueue(object : Callback<Void> {
+                override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                    if (response.isSuccessful) {
+
+                        navController.navigate(Screen.HomePage.route){
+                            popUpTo(Screen.HomePage.route){
+                                inclusive = true
+                            }
+                        }
+                    } else {
+                        // Handle error
+                        val errorMessage = "Error: ${response.code()}"
+                        // Show error message to the user
+                        showToast(toastContext,errorMessage)
+                    }
+                }
+
+                override fun onFailure(call: Call<Void>, t: Throwable) {
+                    val errorMessage = "Failed to update: ${t.localizedMessage}"
+                    // Show error message to the user
+                    showToast(toastContext,errorMessage)
+                }
+            })
 
         },
-            containerColor = SkyBlue
-        )
-        Row(
-        )
-        {
-            Text(
-                text = "Due Clear?",
-                color = Indigo,
-                fontSize = 28.sp,
-                fontWeight = FontWeight.Bold,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.padding(
-                    start = 16.dp,
-                    end = 16.dp,
-                    top = 16.dp,
-                    bottom = 8.dp
-                )
-            )
-            CButton(text = "Notify Owner", onClick = {
-
-            },
-                containerColor = Color.DarkGray
-            )
-        }
-        // Spacer(modifier = Modifier.height(20.dp))
-    }
-}
-
-@Composable
-fun BillStatusBox(isPaid: Boolean, modifier: Modifier = Modifier) {
-    val backgroundColor = if (isPaid) {
-        Color.Green // Change to your desired color for paid bills
-    } else {
-        Color.Red // Change to your desired color for due bills
-    }
-
-    Box(
-        modifier = modifier
-            .size(100.dp, 50.dp)
-            .background(backgroundColor)
-    ) {
-        // Display the "Paid" or "Due" text inside the box
-        Text(
-            text = if (isPaid) "Paid" else "Due",
-            color = Color.White,
-            fontSize = 16.sp,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier.align(Alignment.Center)
+            containerColor = Indigo
         )
     }
 }
-
-@Preview(showSystemUi = true, showBackground = true)
-@Composable
-fun YourUnitPre() {
-    val navController = rememberNavController()
-    YourUnit(navController)
+private fun showToast(context: Context, message: String) {
+    Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
 }
