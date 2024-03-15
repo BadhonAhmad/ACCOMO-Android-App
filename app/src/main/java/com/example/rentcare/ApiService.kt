@@ -51,6 +51,12 @@ interface ApiService {
         @Query("code") code : String
     ):Call<List<UnitDetails>>
 
+    @GET("specificunit")
+    fun GetSpecificUnit(
+        @Query("flatname") flatname: String
+    ):Call<List<UnitDetails>>
+
+
     @GET("rentedlist")
     fun GetRentedList(
         @Query("email") email : String

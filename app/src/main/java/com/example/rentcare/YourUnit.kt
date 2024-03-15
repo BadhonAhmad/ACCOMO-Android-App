@@ -64,8 +64,6 @@ fun YourUnit(navController: NavController) {
                 .padding(8.dp),
             horizontalArrangement = Arrangement.SpaceBetween
         ){
-
-            //here add the back arrow
             Icon(
                 imageVector = Icons.Default.ArrowBack, // Use the back arrow icon
                 contentDescription = null, // Content description can be null for decorative icons
@@ -73,8 +71,8 @@ fun YourUnit(navController: NavController) {
                     .size(24.dp) // Set the size of the icon
                     .clickable {
                         // Handle back arrow click action (e.g., navigate back)
-                        navController.navigate(Screen.FindUnit.route) {
-                            popUpTo(Screen.FindUnit.route) {
+                        navController.navigate(Screen.HomePage.route) {
+                            popUpTo(Screen.HomePage.route) {
                                 inclusive = true
                             }
                         }
