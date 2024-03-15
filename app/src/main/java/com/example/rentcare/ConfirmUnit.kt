@@ -1,6 +1,7 @@
 package com.example.rentcare
 
 import android.content.Context
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -21,9 +22,11 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -48,6 +51,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 fun ConfirmUnit(navController: NavController) {
     val toastContext = LocalContext.current
     val notification = rememberSaveable{ mutableStateOf("") }
+    var email by remember { mutableStateOf(MainActivity.renterInfo?.email) }
 
     val BASE_URL = "http://192.168.43.186:5001/"
     val apiService: ApiService by lazy {
@@ -218,10 +222,53 @@ fun ConfirmUnit(navController: NavController) {
                 override fun onResponse(call: Call<Void>, response: Response<Void>) {
                     if (response.isSuccessful) {
 
-                        navController.navigate(Screen.HomePage.route){
-                            popUpTo(Screen.HomePage.route){
-                                inclusive = true
-                            }
+                        if (email?.isNotEmpty() == true) {
+                            // Use the existing apiService instance
+                            val getRentedListCall: Call<List<RentedFlats>> =
+                                apiService.GetRentedList(email ?: "")
+
+
+                            getRentedListCall.enqueue(object : Callback<List<RentedFlats>> {
+                                override fun onResponse(
+                                    call: Call<List< RentedFlats >>,
+                                    response: Response<List < RentedFlats >>
+                                ) {
+                                    if (response.isSuccessful) {
+                                        val resultList: List<RentedFlats>? = response.body()
+                                        if (resultList != null && resultList.isNotEmpty()) {
+                                            MainActivity.rentedList = resultList
+
+//                                            navController.navigate(Screen.ConfirmUnit.route) {
+//                                                popUpTo(Screen.ConfirmUnit.route) {
+//                                                    inclusive = true
+//                                                }
+//                                            }
+                                        }
+
+                                        navController.navigate(Screen.HomePage.route){
+                                            popUpTo(Screen.HomePage.route){
+                                                inclusive = true
+                                            }
+                                        }
+
+                                    } else {
+                                        val msg = response.message()
+                                        // Handle the case where the response body is empty or null
+                                        Log.d("badhonvaiQuery",msg)
+                                    }
+                                }
+
+                                override fun onFailure(
+                                    call: Call<List<RentedFlats>>,
+                                    t: Throwable
+                                ) {
+                                    Toast.makeText(
+                                        toastContext,
+                                        "Network failure. Error: ${t.message}",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+                            })
                         }
                     } else {
                         // Handle error
@@ -237,7 +284,6 @@ fun ConfirmUnit(navController: NavController) {
                     showToast(toastContext,errorMessage)
                 }
             })
-
         },
             containerColor = Indigo
         )

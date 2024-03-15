@@ -17,6 +17,8 @@ class MainActivity : ComponentActivity() {
         var flatDetails : FlatDetails ? = null
         var unitDetails : UnitDetails ? = null
         var rentedFlats : RentedFlats ? = null
+        var rentedList : List<RentedFlats> ?= emptyList()
+
       //  var resultList: List<Getdata>?= null
       //  var semester:String?=null
     }

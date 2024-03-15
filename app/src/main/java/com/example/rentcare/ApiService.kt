@@ -34,6 +34,7 @@ interface ApiService {
         @Query("email") email:String,
         @Query("password") password:String
     ):Call<List<RenterInfo>>
+
     @GET("ownerinfo")
     fun GetOwnerInfo(
         @Query("email") email:String,
@@ -49,5 +50,11 @@ interface ApiService {
     fun GetUnitDetails(
         @Query("code") code : String
     ):Call<List<UnitDetails>>
+
+    @GET("rentedlist")
+    fun GetRentedList(
+        @Query("email") email : String
+    ):Call<List<RentedFlats>>
+
 
 }

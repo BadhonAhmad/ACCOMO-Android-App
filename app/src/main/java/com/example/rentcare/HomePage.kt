@@ -5,6 +5,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowBack
@@ -17,14 +18,15 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import java.util.*
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomePage(navController: NavController) {
-    val rentedUnits = remember { mutableStateListOf("") }
     Scaffold(
         topBar = {
             TopAppBar(
@@ -67,15 +69,32 @@ fun HomePage(navController: NavController) {
             // Add Unit button
             Box(
                 modifier = Modifier
-                    .fillMaxWidth()
                     .padding(top = 80.dp, start = 16.dp, end = 16.dp)
             ) {
                 Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.End,
-                    verticalAlignment = Alignment.CenterVertically
+                    modifier = Modifier.fillMaxSize()
                 ) {
-                    Spacer(modifier = Modifier.weight(1f))
+                    LazyColumn(
+                        modifier = Modifier.weight(1f)
+                    ) {
+                        itemsIndexed(MainActivity.rentedList!!) { ind,unit ->
+                            var name = unit.flatname
+
+                            Text(
+                                text = "$ind: $name",
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(16.dp)
+                                    .clickable {
+//                                navController.navigate(Screen.YourUnit.route) {
+//                                    popUpTo(Screen.YourUnit.route) {
+//                                        inclusive = true
+//                                    }
+//                                }
+                                    }
+                            )
+                        }
+                    }
                     FloatingActionButton(
                         onClick = {
                             //EnterUnit
@@ -90,26 +109,8 @@ fun HomePage(navController: NavController) {
                                 text = "Add Unit",
                                 fontWeight = FontWeight.Bold
                             )
-                        }
-                    )
-                }
-            }
-
-
-            LazyColumn {
-                items(rentedUnits) { unit ->
-                    Text(
-                        text = "Rented Unit: $unit",
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(16.dp)
-                            .clickable {
-                                navController.navigate(Screen.YourUnit.route){
-                                    popUpTo(Screen.YourUnit.route){
-                                        inclusive = true
-                                    }
-                                }
-                            }
+                        },
+                        modifier = Modifier.padding(16.dp)
                     )
                 }
             }
@@ -117,4 +118,8 @@ fun HomePage(navController: NavController) {
     )
 }
 
-
+@Preview(showBackground = true, showSystemUi = true)
+@Composable
+fun HomePagePrev() {
+    HomePage(navController = rememberNavController())
+}

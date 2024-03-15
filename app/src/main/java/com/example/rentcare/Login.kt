@@ -1,3 +1,4 @@
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -19,6 +20,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -35,6 +37,7 @@ import com.example.rentcare.ApiService
 import com.example.rentcare.Components.CButton
 import com.example.rentcare.MainActivity
 import com.example.rentcare.OwnerInfo
+import com.example.rentcare.RentedFlats
 import com.example.rentcare.RenterInfo
 import com.example.rentcare.Screen
 import com.example.rentcare.ui.theme.Indigo
@@ -50,6 +53,9 @@ fun Login(
     navController: NavController,
 ) {
     val toastContext = LocalContext.current
+
+    val notification = rememberSaveable{ mutableStateOf("") }
+
     Surface {
         Column(
             modifier = Modifier
@@ -136,6 +142,54 @@ fun Login(
                                 val resultList: List<RenterInfo>? = response.body()
                                 if (resultList != null && resultList.isNotEmpty()) {
                                     MainActivity.renterInfo = resultList.first()
+                                    if (email.text.isNotEmpty()) {
+                                        // Use the existing apiService instance
+                                        val getRentedListCall: Call<List<RentedFlats>> =
+                                            apiService.GetRentedList(email.text)
+
+
+                                        getRentedListCall.enqueue(object : Callback<List<RentedFlats>> {
+                                            override fun onResponse(
+                                                call: Call<List<RentedFlats>>,
+                                                response: Response<List <RentedFlats>>
+                                            ) {
+                                                if (response.isSuccessful) {
+                                                    val resultList: List<RentedFlats>? = response.body()
+                                                    if (resultList != null && resultList.isNotEmpty()) {
+                                                        MainActivity.rentedList = resultList
+
+//                                            navController.navigate(Screen.ConfirmUnit.route) {
+//                                                popUpTo(Screen.ConfirmUnit.route) {
+//                                                    inclusive = true
+//                                                }
+//                                            }
+                                                    }
+
+                                                    navController.navigate(Screen.HomePage.route){
+                                                        popUpTo(Screen.HomePage.route){
+                                                            inclusive = true
+                                                        }
+                                                    }
+
+                                                } else {
+                                                    val msg = response.message()
+                                                    // Handle the case where the response body is empty or null
+                                                    Log.d("badhonvaiQuery",msg)
+                                                }
+                                            }
+
+                                            override fun onFailure(
+                                                call: Call<List<RentedFlats>>,
+                                                t: Throwable
+                                            ) {
+                                                Toast.makeText(
+                                                    toastContext,
+                                                    "Network failure. Error: ${t.message}",
+                                                    Toast.LENGTH_SHORT
+                                                ).show()
+                                            }
+                                        })
+                                    }
                                     navController.navigate(Screen.HomePage.route) {
                                         popUpTo(Screen.HomePage.route) {
                                             inclusive = true
