@@ -75,23 +75,18 @@ fun ClickableIcon(
         }
     )
 }
-
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FindUnit(navController: NavController) {
     val toastContext = LocalContext.current
     var fname by remember { mutableStateOf(TextFieldValue()) }
+    var flatname = MainActivity.rentedFlats?.flatname ?: ""
     var owner by remember { mutableStateOf(TextFieldValue(MainActivity.ownerInfo?.email ?: "")) }
 
     Column(
         modifier = Modifier.fillMaxSize()
-
     ) {
-        Row(
-
-        )
-        {
+        Row {
             Text(
                 text = "Home Page",
                 color = Color.Blue,
@@ -174,70 +169,119 @@ fun FindUnit(navController: NavController) {
             )
         )
 
-        CButton(text = "Find Unit", onClick = {
-            if (fname.text.isNotEmpty()) {
-                val BASE_URL = "http://192.168.43.186:5001/"
-                val apiService: ApiService by lazy {
-                    Retrofit.Builder()
-                        .baseUrl(BASE_URL)
-                        .addConverterFactory(GsonConverterFactory.create())
-                        .build()
-                        .create(ApiService::class.java)
-                }
-                val getStudentInfoCall : Call<List<FlatDetails>> =
-                    apiService.GetFlatDetails(fname.text)
+        CButton(
+            text = "Find Unit",
+            onClick = {
+                if (fname.text.isNotEmpty()) {
+                    val BASE_URL = "http://192.168.43.186:5001/"
+                    val apiService: ApiService by lazy {
+                        Retrofit.Builder()
+                            .baseUrl(BASE_URL)
+                            .addConverterFactory(GsonConverterFactory.create())
+                            .build()
+                            .create(ApiService::class.java)
+                    }
 
-                getStudentInfoCall.enqueue(object : Callback<List<FlatDetails>> {
-                    override fun onResponse(
-                        call: Call<List<FlatDetails>>,
-                        response: Response<List<FlatDetails>>
-                    ) {
-                        if (response.isSuccessful) {
-                            val resultList: List<FlatDetails> ?= response.body()
-                            if (resultList != null && resultList.isNotEmpty()) {
-                                MainActivity.flatDetails = resultList.first()
-                                Log.d("Navigation", "Navigating from FindUnit to FlatProfile")
-                                navController.navigate(Screen.FlatProfile.route) {
-                                    popUpTo(Screen.FlatProfile.route) {
-                                        inclusive = true
+                    val getStudentInfoCall: Call<List<RentedFlats>> =
+                        apiService.GetFlatDetails(fname.text)
+
+                    getStudentInfoCall.enqueue(object : Callback<List<RentedFlats>> {
+                        override fun onResponse(
+                            call: Call<List<RentedFlats>>,
+                            response: Response<List<RentedFlats>>
+                        ) {
+                            if (response.isSuccessful) {
+                                val resultList: List<RentedFlats>? = response.body()
+                                if (resultList != null && resultList.isNotEmpty()) {
+                                    MainActivity.rentedFlats = resultList.first()
+                                    if (fname.text.isNotEmpty()){
+                                        val BASE_URL = "http://192.168.43.186:5001/"
+                                        val apiService: ApiService by lazy {
+                                            Retrofit.Builder()
+                                                .baseUrl(BASE_URL)
+                                                .addConverterFactory(GsonConverterFactory.create())
+                                                .build()
+                                                .create(ApiService::class.java)
+                                        }
+                                        val getStudentInfoCall : Call<List<BillStatus>> =
+                                            apiService.GetBillStatus(fname.text)
+
+                                        getStudentInfoCall.enqueue(object : Callback<List<BillStatus>> {
+                                            override fun onResponse(
+                                                call: Call<List<BillStatus>>,
+                                                response: Response<List<BillStatus>>
+                                            ) {
+                                                if (response.isSuccessful) {
+                                                    val resultList: List<BillStatus>? = response.body()
+                                                    if (resultList != null && resultList.isNotEmpty()) {
+                                                        MainActivity.billStatus = resultList.first()
+
+                                                    } else {
+                                                        Toast.makeText(
+                                                            toastContext,
+                                                            "No bill status found for $flatname",
+                                                            Toast.LENGTH_SHORT
+                                                        ).show()
+                                                    }
+                                                } else {
+                                                    Toast.makeText(
+                                                        toastContext,
+                                                        "API call failed. Code: ${response.code()}",
+                                                        Toast.LENGTH_SHORT
+                                                    ).show()
+                                                }
+                                            }
+
+                                            override fun onFailure(
+                                                call: Call<List<BillStatus>>,
+                                                t: Throwable
+                                            ) {
+                                                Toast.makeText(
+                                                    toastContext,
+                                                    "${t.message}",
+                                                    Toast.LENGTH_SHORT
+                                                ).show()
+                                            }
+                                        })
+                                    } else {
+                                        Toast.makeText(toastContext, "Flat name is empty", Toast.LENGTH_SHORT)
+                                            .show()
                                     }
+                                    navController.navigate(Screen.FlatProfile.route) {
+                                        popUpTo(Screen.FlatProfile.route) {
+                                            inclusive = true
+                                        }
+                                    }
+                                } else {
+                                    // Handle the case where the response body is empty or null
                                 }
                             } else {
-                                // Handle the case where the response body is empty or null
+                                Toast.makeText(
+                                    toastContext,
+                                    "API call failed. Code: ${response.code()}",
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
-                        } else {
-                            try {
-                                // ... Your existing code ...
-                            } catch (e: Exception) {
-                                e.printStackTrace()
-                                Toast.makeText(toastContext, "An error occurred: ${e.message}", Toast.LENGTH_SHORT).show()
-                            }
-
                         }
-                    }
 
-                    override fun onFailure(
-                        call: Call<List<FlatDetails>>,
-                        t: Throwable
-                    ) {
-                        Toast.makeText(
-                            toastContext,
-                            "Network failure. Error: ${t.message}",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-                })
-            } else {
-                try {
-                    // ... Your existing code ...
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                    Toast.makeText(toastContext, "An error occurred: ${e.message}", Toast.LENGTH_SHORT).show()
+                        override fun onFailure(
+                            call: Call<List<RentedFlats>>,
+                            t: Throwable
+                        ) {
+                            Toast.makeText(
+                                toastContext,
+                                "Network failure. Error: ${t.message}",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    })
+                } else {
+                    Toast.makeText(toastContext, "Please Insert All The Value", Toast.LENGTH_SHORT)
+                        .show()
                 }
-
-            }
-        },
+            },
             containerColor = Indigo
         )
+
     }
 }

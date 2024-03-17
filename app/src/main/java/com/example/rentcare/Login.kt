@@ -206,7 +206,6 @@ fun Login(
                                 ).show()
                             }
                         }
-
                         override fun onFailure(
                             call: Call<List<RenterInfo>>,
                             t: Throwable
@@ -226,7 +225,7 @@ fun Login(
                 containerColor = Indigo
             )
             CButton(text = "Owner", onClick = {
-                if (email.text.isNotEmpty() && password.text.isNotEmpty()) {
+                if (email.text.isNotEmpty() && password.text.isNotEmpty()){
                     val BASE_URL = "http://192.168.43.186:5001/"
                     val apiService: ApiService by lazy {
                         Retrofit.Builder()

@@ -4,13 +4,16 @@ package com.example.rentcare
 
 import android.content.Context
 import android.widget.Toast
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -24,15 +27,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.rentcare.Components.CButton
+
 import com.example.rentcare.ui.theme.Indigo
 import retrofit2.Call
 import retrofit2.Callback
@@ -64,20 +72,20 @@ fun CreateFlat(navController: NavController) {
         modifier= Modifier.fillMaxSize()
     ){
         Text(
-            text = "Flat's Information :",
+            text = "Enter Flat's Info:",
             color = Color.Blue,
-            fontSize = 40.sp,
+            fontSize = 30.sp,
             fontWeight = FontWeight.Bold,
             textAlign = TextAlign.Center,
             modifier = Modifier.padding(
                 start = 16.dp,
                 end = 16.dp,
-                top = 100.dp,
+                top = 30.dp,
                 bottom = 8.dp
             )
         )
         OutlinedTextField(
-            value =fname.value ,
+            value =fname.value,
             onValueChange ={ fname.value=it },
             singleLine = true,
             label = { Text(text = "Flats name") },
@@ -161,7 +169,6 @@ fun CreateFlat(navController: NavController) {
                 gas = fgas.value.text.toIntOrNull() ?: 0
             )
 
-
             apiService.InputFlatInfo(flatInfo).enqueue(object : Callback<Void> {
                 override fun onResponse(call: Call<Void>, response: Response<Void>) {
                     if (response.isSuccessful) {
@@ -184,11 +191,39 @@ fun CreateFlat(navController: NavController) {
         },
             containerColor = Indigo
         )
+        Row(
+            modifier = Modifier
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.Center
+        ) {
+            ClickableText(
+                text = AnnotatedString("Cancel"),
+                onClick = { offset ->
+                    navController.navigate(Screen.FindUnit.route) {
+                        popUpTo(Screen.FindUnit.route) {
+                            inclusive = true
+                        }
+                    }
+                    // Handle click action for "Cancel"
+                    // For now, you can leave it empty or navigate to another destination
+                },
+                style = TextStyle(
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.Black // Set the color you desire
+                )
+            )
+        }
     }
 }
 
 private fun showToast(context: Context, message: String) {
     Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+}
+@Preview(showSystemUi = true, showBackground = true)
+@Composable
+fun Pre() {
+    CreateFlat(navController = rememberNavController())
 }
 
 

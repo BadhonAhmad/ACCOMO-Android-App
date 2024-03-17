@@ -4,6 +4,7 @@ import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.PUT
 import retrofit2.http.Query
 
 
@@ -28,6 +29,15 @@ interface ApiService {
     fun InputFlatInfo(
         @Body flatInfo: FlatInfo
     ):Call<Void>
+    @PUT("billstatus")
+    fun UpdateBillStatus(
+        @Body billStatus: BillStatus
+    ):Call<Void>
+
+    @GET("billstatus")
+    fun GetBillStatus(
+        @Query("flatname") flatname: String
+    ):Call<List<BillStatus>>
 
     @GET("renterinfo")
     fun GetrenterInfo(
@@ -44,7 +54,7 @@ interface ApiService {
     @GET("flatdetails")
     fun GetFlatDetails(
         @Query("flatname") flatname : String
-    ):Call<List<FlatDetails>>
+    ):Call<List<RentedFlats>>
 
     @GET("unitdetails")
     fun GetUnitDetails(
@@ -61,6 +71,8 @@ interface ApiService {
     fun GetRentedList(
         @Query("email") email : String
     ):Call<List<RentedFlats>>
+
+
 
 
 }

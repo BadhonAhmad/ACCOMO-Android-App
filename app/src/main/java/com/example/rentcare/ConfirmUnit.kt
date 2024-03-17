@@ -231,7 +231,7 @@ fun ConfirmUnit(navController: NavController) {
                             getRentedListCall.enqueue(object : Callback<List<RentedFlats>> {
                                 override fun onResponse(
                                     call: Call<List< RentedFlats >>,
-                                    response: Response<List < RentedFlats >>
+                                    response: Response<List <RentedFlats>>
                                 ) {
                                     if (response.isSuccessful) {
                                         val resultList: List<RentedFlats>? = response.body()
@@ -244,7 +244,6 @@ fun ConfirmUnit(navController: NavController) {
 //                                                }
 //                                            }
                                         }
-
                                         navController.navigate(Screen.HomePage.route){
                                             popUpTo(Screen.HomePage.route){
                                                 inclusive = true

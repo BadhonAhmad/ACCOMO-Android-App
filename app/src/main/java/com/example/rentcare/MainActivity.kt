@@ -18,9 +18,9 @@ class MainActivity : ComponentActivity() {
         var unitDetails : UnitDetails ? = null
         var rentedFlats : RentedFlats ? = null
         var rentedList : List<RentedFlats> ?= emptyList()
-
-      //  var resultList: List<Getdata>?= null
-      //  var semester:String?=null
+        var billStatus : BillStatus ?= null
+      //var resultList: List<Getdata>?= null
+      //var semester:String?=null
     }
     lateinit var navController : NavHostController
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,7 +29,6 @@ class MainActivity : ComponentActivity() {
         setContent {
             navController = rememberNavController()
             SetUpNavGraph(navController = navController)
-
         }
     }
 }

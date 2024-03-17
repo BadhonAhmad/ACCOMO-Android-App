@@ -52,3 +52,8 @@ data class RentedFlats(
     var rent : Int,
     var gas : Int
 )
+
+data class BillStatus(
+    var flatname : String,
+    var billstatus: Int
+)
