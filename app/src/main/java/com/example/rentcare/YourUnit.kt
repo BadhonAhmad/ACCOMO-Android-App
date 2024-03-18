@@ -22,8 +22,11 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -68,7 +71,7 @@ fun YourUnit(navController: NavController) {
                 imageVector = Icons.Default.ArrowBack, // Use the back arrow icon
                 contentDescription = null, // Content description can be null for decorative icons
                 modifier = Modifier
-                    .size(24.dp) // Set the size of the icon
+                    .size(30.dp) // Set the size of the icon
                     .clickable {
                         // Handle back arrow click action (e.g., navigate back)
                         navController.navigate(Screen.HomePage.route) {
@@ -229,8 +232,32 @@ fun YourUnit(navController: NavController) {
                 color = Color.Black // Set the text color
             )
         )
+        var billStatusText by rememberSaveable { mutableStateOf("") }
+        var isPaid = MainActivity.billStatus?.billstatus == 1
+        billStatusText = if (isPaid) "Paid" else "Due"
+        var dynamicText = rememberSaveable { mutableStateOf(billStatusText) }
+        LaunchedEffect(isPaid) {
+            dynamicText.value = if (isPaid) "Paid" else "Due"
+        }
 
-        BillStatusBox(isPaid = false, modifier = Modifier.align(Alignment.CenterHorizontally))
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
+                .background(color = Color.Yellow)
+        ) {
+            Text(
+                text = dynamicText.value,
+                modifier = Modifier.align(Alignment.Center),
+                style = TextStyle(
+                    fontSize = 30.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.Black
+                )
+            )
+        }
+
+
         CButton(text = "Pay Now", onClick = {
 
         },
@@ -262,29 +289,7 @@ fun YourUnit(navController: NavController) {
     }
 }
 
-@Composable
-fun BillStatusBox(isPaid: Boolean, modifier: Modifier = Modifier) {
-    val backgroundColor = if (isPaid) {
-        Color.Green // Change to your desired color for paid bills
-    } else {
-        Color.Red // Change to your desired color for due bills
-    }
 
-    Box(
-        modifier = modifier
-            .size(100.dp, 50.dp)
-            .background(backgroundColor)
-    ) {
-        // Display the "Paid" or "Due" text inside the box
-        Text(
-            text = if (isPaid) "Paid" else "Due",
-            color = Color.White,
-            fontSize = 16.sp,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier.align(Alignment.Center)
-        )
-    }
-}
 
 @Preview(showSystemUi = true, showBackground = true)
 @Composable

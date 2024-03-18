@@ -4,6 +4,9 @@ package com.example.rentcare
 import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -13,6 +16,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
@@ -46,8 +50,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.rentcare.Components.CButton
 import com.example.rentcare.ui.theme.Indigo
+import com.example.rentcare.ui.theme.SkyBlue
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -56,30 +62,12 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 //import androidx.wear.compose.material.ContentAlpha
 
-@Composable
-fun ClickableIcon(
-    icon: ImageVector,
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier,
-//    tint: Color = LocalContentColor.current.copy(alpha = ContentAlpha.medium)
-) {
-    IconButton(
-        onClick = onClick,
-        modifier = modifier,
-        content = {
-            Icon(
-                imageVector = icon,
-                contentDescription = null
-                //tint = tint
-            )
-        }
-    )
-}
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FindUnit(navController: NavController) {
     val toastContext = LocalContext.current
     var fname by remember { mutableStateOf(TextFieldValue()) }
+    var ffname by remember { mutableStateOf(TextFieldValue()) }
     var flatname = MainActivity.rentedFlats?.flatname ?: ""
     var owner by remember { mutableStateOf(TextFieldValue(MainActivity.ownerInfo?.email ?: "")) }
 
@@ -90,7 +78,7 @@ fun FindUnit(navController: NavController) {
             Text(
                 text = "Home Page",
                 color = Color.Blue,
-                fontSize = 20.sp,
+                fontSize = 30.sp,
                 fontWeight = FontWeight.Bold,
                 textAlign = TextAlign.Center,
                 modifier = Modifier.padding(
@@ -100,73 +88,76 @@ fun FindUnit(navController: NavController) {
                     bottom = 8.dp
                 )
             )
-            Spacer(modifier = Modifier.width(200.dp))
-            ClickableIcon(
-                icon = Icons.Default.Notifications,
-                onClick = {
-                    // Handle icon click event
-                },
-                modifier = Modifier.size(50.dp),
-                //tint = Color.Red
-            )
-
-            ClickableIcon(
-                icon = Icons.Default.Person,
-                onClick = {
-                    // Handle icon click event
-                },
-                modifier = Modifier.size(50.dp),
-                //tint = Color.Red
-            )
-        }
-        Spacer(modifier = Modifier.height(100.dp))
-        Row(
-            verticalAlignment = Alignment.CenterVertically
-        ){
-            Spacer(modifier = Modifier.width(100.dp))
-            RoundedButton(
-                modifier = Modifier.padding(top = 40.dp,end = 16.dp),
-                text = "Create Apartment",
-                buttonColor = Color.Black,
-                textColor = Color.White,
-                height = 48.dp,
-                width = 150.dp,
-                onClick = {
-                    navController.navigate(Screen.CreateFlat.route){
-                        popUpTo(Screen.CreateFlat.route){
-                            inclusive = true
+            Spacer(modifier = Modifier.width(130.dp))
+            Box(
+                modifier = Modifier
+                    .size(55.dp)
+                    .background(
+                        color = Color.LightGray, // Change the background color as needed
+                        shape = CircleShape // Apply a circular shape to the background
+                    )
+                    .clickable {
+                        navController.navigate(Screen.ProfileOwner.route) {
+                            popUpTo(Screen.ProfileOwner.route) {
+                                inclusive = true
+                            }
                         }
                     }
-                }
-            )
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Person,
+                    contentDescription = null, // Content description can be null for decorative icons
+                    modifier = Modifier.size(50.dp), // Set the size of the icon
+                    tint = Color.Black // Change the icon color as needed
+                )
+            }
         }
+        Spacer(modifier = Modifier.height(20.dp))
+        Text(
+            text = "Create your apartment :",
+            color = Color.Blue,
+            fontSize = 25.sp,
+            fontWeight = FontWeight.Bold,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.padding(
+                start = 16.dp,
+                end = 16.dp 
+            )
+        )
+
+        CButton(text = "Create Apartment", onClick = {
+                navController.navigate(Screen.CreateFlat.route) {
+                    popUpTo(Screen.CreateFlat.route) {
+                        inclusive = true
+                    }
+                }
+            }
+        )
+
+        Spacer(modifier = Modifier.height(25.dp))
+
         Text(
             text = "Find a Unit :",
             color = Color.Blue,
-            fontSize = 40.sp,
+            fontSize = 25.sp,
             fontWeight = FontWeight.Bold,
             textAlign = TextAlign.Center,
             modifier = Modifier.padding(
                 start = 16.dp,
                 end = 16.dp,
                 top = 16.dp,
-                bottom = 8.dp
             )
         )
         OutlinedTextField(
             value =fname ,
             onValueChange ={ fname=it},
             singleLine = true,
-            label = { Text(text = "Flats Name :(eg. 'Home-1-A'") },
+            label = { Text(text = "Enter Units Name :(eg. 'Name-1-A'") },
             //colors = TextFieldDefaults.colors(),
             modifier= Modifier
                 .fillMaxWidth()
                 .padding(bottom = 5.dp, start = 10.dp, end = 10.dp),
-            shape = RoundedCornerShape(15.dp),
-            keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Text,
-                imeAction = ImeAction.Next
-            )
+            shape = RoundedCornerShape(15.dp)
         )
 
         CButton(
@@ -279,9 +270,96 @@ fun FindUnit(navController: NavController) {
                     Toast.makeText(toastContext, "Please Insert All The Value", Toast.LENGTH_SHORT)
                         .show()
                 }
-            },
-            containerColor = Indigo
+            }
         )
+        Spacer(modifier = Modifier.height(25.dp))
+        Text(
+            text = "Get Code of unit :",
+            color = Color.Blue,
+            fontSize = 25.sp,
+            fontWeight = FontWeight.Bold,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.padding(
+                start = 16.dp,
+                end = 16.dp,
+                top = 16.dp,
+                bottom = 8.dp
+            )
+        )
+        OutlinedTextField(
+            value =ffname ,
+            onValueChange ={ ffname=it},
+            singleLine = true,
+            label = { Text(text = "Enter Units Name :(eg. 'Name-1-A'") },
+            //colors = TextFieldDefaults.colors(),
+            modifier= Modifier
+                .fillMaxWidth()
+                .padding(bottom = 5.dp, start = 10.dp, end = 10.dp),
+            shape = RoundedCornerShape(15.dp)
+        )
+        CButton(
+            text = "Get Code",
+            onClick = {
+                if (ffname.text.isNotEmpty() ){
+                    val BASE_URL = "http://192.168.43.186:5001/"
+                    val apiService: ApiService by lazy {
+                        Retrofit.Builder()
+                            .baseUrl(BASE_URL)
+                            .addConverterFactory(GsonConverterFactory.create())
+                            .build()
+                            .create(ApiService::class.java)
+                    }
+                    val getStudentInfoCall : Call<List<FlatCode>> =
+                        apiService.GetFlatCode(ffname.text)
 
+                    getStudentInfoCall.enqueue(object : Callback<List<FlatCode>> {
+                        override fun onResponse(
+                            call: Call<List<FlatCode>>,
+                            response: Response<List<FlatCode>>
+                        ) {
+                            if (response.isSuccessful) {
+                                val resultList: List<FlatCode> ?= response.body()
+                                if (resultList != null && resultList.isNotEmpty()) {
+                                    MainActivity.flatCode = resultList.first()
+                                    navController.navigate(Screen.FlatCode.route) {
+                                        popUpTo(Screen.FlatCode.route) {
+                                            inclusive = true
+                                        }
+                                    }
+                                } else {
+                                    // Handle the case where the response body is empty or null
+                                }
+                            } else {
+                                Toast.makeText(
+                                    toastContext,
+                                    "API call failed. Code: ${response.code()}",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                        }
+
+                        override fun onFailure(
+                            call: Call<List<FlatCode>>,
+                            t: Throwable
+                        ) {
+                            Toast.makeText(
+                                toastContext,
+                                "Network failure. Error: ${t.message}",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    })
+                } else {
+                    Toast.makeText(toastContext, "Please Insert All The Value", Toast.LENGTH_SHORT)
+                        .show()
+                }
+            }
+        )
     }
+}
+
+@Preview(showBackground = true, showSystemUi = true)
+@Composable
+fun P() {
+    FindUnit(navController = rememberNavController())
 }

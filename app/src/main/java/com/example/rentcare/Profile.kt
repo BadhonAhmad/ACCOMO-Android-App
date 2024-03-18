@@ -31,21 +31,23 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.rentcare.Components.CButton
 import com.example.rentcare.ui.theme.Indigo
 import com.example.rentcare.ui.theme.SkyBlue
 
 @Composable
 fun Profile(navController: NavController) {
-    val notification = rememberSaveable{ mutableStateOf("") }
-    if(notification.value.isNotEmpty()){
-        Toast.makeText(LocalContext.current,notification.value,Toast.LENGTH_LONG).show()
-        notification.value = ""
-    }
+//    val notification = rememberSaveable{ mutableStateOf("") }
+//    if(notification.value.isNotEmpty()){
+//        Toast.makeText(LocalContext.current,notification.value,Toast.LENGTH_LONG).show()
+//        notification.value = ""
+//    }
     Column(
         modifier = Modifier
             .verticalScroll(rememberScrollState())
@@ -62,7 +64,7 @@ fun Profile(navController: NavController) {
                 imageVector = Icons.Default.ArrowBack, // Use the back arrow icon
                 contentDescription = null, // Content description can be null for decorative icons
                 modifier = Modifier
-                    .size(24.dp) // Set the size of the icon
+                    .size(30.dp) // Set the size of the icon
                     .clickable {
                         // Handle back arrow click action (e.g., navigate back)
                         navController.navigate(Screen.HomePage.route) {
@@ -76,99 +78,127 @@ fun Profile(navController: NavController) {
                 contentAlignment = Alignment.Center
             ) {
                 Text(
-                    text = "Profile",
+                    text = "    Profile",
                     modifier = Modifier
                         .fillMaxWidth(.5f)
-                        .border(2.dp, Color.Black, shape = RoundedCornerShape(8.dp)),
+                        .border(2.dp, Color.Blue, shape = RoundedCornerShape(8.dp)),
                         //.background(color = Indigo, shape = RoundedCornerShape(8.dp)),
                     style = TextStyle(
                         fontSize = 25.sp, // Set the font size
                         fontWeight = FontWeight.Bold,
-                        color = Color.Black // Set the text color
+                        color = Color.Blue // Set the text color
                     )
                 )
             }
         }
+        Spacer(modifier = Modifier.height(50.dp))
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 16.dp, end = 16.dp, top = 8.dp)
+                .background(color= Color.White, shape = RoundedCornerShape(8.dp))
+                .border(
+                    width = 2.dp,
+                    color = Color.Black,
+                    shape = RoundedCornerShape(8.dp)
+                )
+        ) {
+            Text(
+                text = "Name : ${MainActivity.renterInfo?.name}",
+                modifier = Modifier.padding(8.dp),
+                style = TextStyle(
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.Black
+                )
+            )
+        }
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 16.dp, end = 16.dp, top = 8.dp)
+                .background(color= Color.White, shape = RoundedCornerShape(8.dp))
+                .border(
+                    width = 2.dp,
+                    color = Color.Black,
+                    shape = RoundedCornerShape(8.dp)
+                )
+        ) {
+            Text(
+                text = "Address : ${MainActivity.renterInfo?.address}",
+                modifier = Modifier.padding(8.dp),
+                style = TextStyle(
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.Black
+                )
+            )
+        }
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 16.dp, end = 16.dp, top = 8.dp)
+                .background(color= Color.White, shape = RoundedCornerShape(8.dp))
+                .border(
+                    width = 2.dp,
+                    color = Color.Black,
+                    shape = RoundedCornerShape(8.dp)
+                )
+        ) {
+            Text(
+                text = "Email : ${MainActivity.renterInfo?.email}",
+                modifier = Modifier.padding(8.dp),
+                style = TextStyle(
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.Black
+                )
+            )
+        }
 
-        Text(
-            text = "Name : ${MainActivity.renterInfo?.name}",
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(start = 16.dp, end = 16.dp, top = 20.dp)
-//                .background(color= SkyBlue,
-//                    shape = RoundedCornerShape(8.dp)) // Set the background color of the box
-                .border(2.dp, Color.White,shape = RoundedCornerShape(8.dp) ) // Set the border of the box
-                .padding(8.dp), // Add padding inside the box
-            style = TextStyle(
-                fontSize = 20.sp, // Set the font size
-                fontWeight = FontWeight.Bold,
-                color = Color.Black // Set the text color
-            )
-        )
-        Text(
-            text = "Address : ${MainActivity.renterInfo?.address}",
+        Box(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 16.dp, end = 16.dp, top = 8.dp)
-//                .background(color= SkyBlue,
-//                    shape = RoundedCornerShape(8.dp)) // Set the background color of the box
-                .border(2.dp, Color.White,shape = RoundedCornerShape(8.dp) )// Set the border of the box
-                .padding(8.dp), // Add padding inside the box
-            style = TextStyle(
-                fontSize = 20.sp, // Set the font size
-                fontWeight = FontWeight.Bold,
-                color = Color.Black // Set the text color
+                .background(color= Color.White, shape = RoundedCornerShape(8.dp))
+                .border(
+                    width = 2.dp,
+                    color = Color.Black,
+                    shape = RoundedCornerShape(8.dp)
+                )
+        ) {
+            Text(
+                text = "Mobile : ${MainActivity.renterInfo?.mobile}",
+                modifier = Modifier.padding(8.dp),
+                style = TextStyle(
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.Black
+                )
             )
-        )
-        Text(
-            text = "Email : ${MainActivity.renterInfo?.email}",
+        }
+        Box(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 16.dp, end = 16.dp, top = 8.dp)
-//                .background(color = SkyBlue,
-//                    shape = RoundedCornerShape(8.dp)) // Set the background color of the box
-                .border(2.dp, Color.White,shape = RoundedCornerShape(8.dp) ) // Set the border of the box
-                .padding(8.dp), // Add padding inside the box
-            style = TextStyle(
-                fontSize = 20.sp, // Set the font size
-                fontWeight = FontWeight.Bold,
-                color = Color.Black // Set the text color
+                .background(color= Color.White, shape = RoundedCornerShape(8.dp))
+                .border(
+                    width = 2.dp,
+                    color = Color.Black,
+                    shape = RoundedCornerShape(8.dp)
+                )
+        ) {
+            Text(
+                text = "NID : ${MainActivity.renterInfo?.nid}",
+                modifier = Modifier.padding(8.dp),
+                style = TextStyle(
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.Black
+                )
             )
-        )
-        Text(
-            text = "Mobile : ${MainActivity.renterInfo?.mobile}",
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(start = 16.dp, end = 16.dp, top = 8.dp)
-//                .background(color = SkyBlue,
-//                    shape = RoundedCornerShape(8.dp)) // Set the background color of the box
-                .border(2.dp, Color.White,shape = RoundedCornerShape(8.dp) )// Set the border of the box
-                .padding(8.dp), // Add padding inside the box
-            style = TextStyle(
-                fontSize = 20.sp, // Set the font size
-                fontWeight = FontWeight.Bold,
-                color = Color.Black // Set the text color
-            )
-        )
-        Text(
-            text = "NID number : ${MainActivity.renterInfo?.nid}",
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(start = 16.dp, end = 16.dp, top = 8.dp)
-//                .background(
-//                    color = SkyBlue,
-//                    shape = RoundedCornerShape(8.dp) // Set the rounded corners
-//                )
-// Set the background color of the box
-                .border(2.dp, Color.White,shape = RoundedCornerShape(8.dp) ) // Set the border of the box
-                .padding(8.dp), // Add padding inside the box
-            style = TextStyle(
-                fontSize = 20.sp, // Set the font size
-                fontWeight = FontWeight.Bold,
-                color = Color.Black // Set the text color
-            )
-        )
-        Spacer(modifier = Modifier.height(20.dp))
+        }
+        Spacer(modifier = Modifier.height(50.dp))
         CButton(text = "Log Out", onClick = {
             navController.navigate(Screen.Login.route) {
                 popUpTo(Screen.Login.route) {
@@ -178,4 +208,10 @@ fun Profile(navController: NavController) {
         })
     }
 
+}
+
+@Preview(showSystemUi = true, showBackground = true)
+@Composable
+fun Pr() {
+    Profile(navController = rememberNavController())
 }

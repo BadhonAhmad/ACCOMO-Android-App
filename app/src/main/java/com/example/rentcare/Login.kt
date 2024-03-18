@@ -30,9 +30,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.rentcare.ApiService
 import com.example.rentcare.Components.CButton
 import com.example.rentcare.MainActivity
@@ -40,6 +42,7 @@ import com.example.rentcare.OwnerInfo
 import com.example.rentcare.RentedFlats
 import com.example.rentcare.RenterInfo
 import com.example.rentcare.Screen
+import com.example.rentcare.YourUnit
 import com.example.rentcare.ui.theme.Indigo
 import retrofit2.Call
 import retrofit2.Callback
@@ -73,7 +76,7 @@ fun Login(
                     text = "Sign in",
                     fontSize = 40.sp,
                     fontWeight = FontWeight.Bold,
-                    color = Color(0xFF4B0082)
+                    color = Color.Black
                 )
             }
 
@@ -221,8 +224,7 @@ fun Login(
                     Toast.makeText(toastContext, "Please Insert All The Value", Toast.LENGTH_SHORT)
                         .show()
                 }
-            },
-                containerColor = Indigo
+            }
             )
             CButton(text = "Owner", onClick = {
                 if (email.text.isNotEmpty() && password.text.isNotEmpty()){
@@ -278,10 +280,9 @@ fun Login(
                     Toast.makeText(toastContext, "Please Insert All The Value", Toast.LENGTH_SHORT)
                         .show()
                 }
-            },
-                containerColor = Indigo
+            }
             )
-            Spacer(modifier = Modifier.height(50.dp))
+            Spacer(modifier = Modifier.height(100.dp))
 
             Box(
                 modifier = Modifier
@@ -296,7 +297,6 @@ fun Login(
                     color = Color(0xFF000113)
                 )
             }
-
             Button(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -310,7 +310,7 @@ fun Login(
                     }
                 },
                 shape = RoundedCornerShape(4.dp),
-                colors = ButtonDefaults.buttonColors(Color.Black)
+                colors = ButtonDefaults.buttonColors(Color.Blue)
             ) {
                 Text(
                     text = "Create an Account",
@@ -322,3 +322,10 @@ fun Login(
     }
 }
 
+
+@Preview(showSystemUi = true, showBackground = true)
+@Composable
+fun hj() {
+    val navController = rememberNavController()
+    Login(navController)
+}

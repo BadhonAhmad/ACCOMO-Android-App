@@ -45,9 +45,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import coil.compose.rememberImagePainter
 import com.example.rentcare.Components.CButton
 import com.example.rentcare.ui.theme.Indigo
@@ -82,13 +84,15 @@ fun SignUpOwner(
     //var con_password by remember { mutableStateOf("") }
     var password = remember { mutableStateOf(TextFieldValue()) }
     Surface(
-        modifier = Modifier.fillMaxSize(),
     ) {
-        Box() {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 10.dp, bottom = 50.dp)
+        ) {
             Column(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 10.dp)
+                    .align(Alignment.Center)
             ) {
                 Text(
                     text = "Sign Up",
@@ -96,15 +100,17 @@ fun SignUpOwner(
                         fontSize = 30.sp,
                         fontFamily = FontFamily.SansSerif,
                         fontWeight = FontWeight(500),
-                        color = Indigo
+                        color = Color.Black
                     ),
                     modifier = Modifier.align(Alignment.CenterHorizontally)
                 )
-                //Spacer(modifier = Modifier.height(120.dp))
             }
+
         }
-        Spacer(modifier = Modifier.height(20.dp))
-        Box(){
+        Box(
+            modifier = Modifier
+                .padding(top = 50.dp)
+        ){
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier
@@ -200,7 +206,7 @@ fun SignUpOwner(
                     shape = RoundedCornerShape(15.dp)
                 )
 
-
+                Spacer(modifier = Modifier.height(50.dp))
                 CButton(text = "Sign Up", onClick = {
                     // Create a RenterInfo object with the entered data
                     val ownerInfo = OwnerInfo(
@@ -244,7 +250,7 @@ fun SignUpOwner(
                 },
                     containerColor = Indigo
                 )
-
+                Spacer(modifier = Modifier.height(10.dp))
                 Row(modifier = Modifier.padding(top = 12.dp,bottom = 40.dp)) {
                     Text("Already have an account?",
                         style = TextStyle(
@@ -275,11 +281,11 @@ fun SignUpOwner(
 private fun showToast(context: Context, message: String) {
     Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
 }
-//@Preview(showSystemUi = ture,)
-//@Composable
-//fun SignUpScreenP(navController: NavController) {
-//    SignUpScreenP(navController = NavController())
-//}
+@Preview(showSystemUi = true, showBackground = true)
+@Composable
+fun SignUpScre() {
+    SignUpOwner(navController = rememberNavController())
+}
 
 
 

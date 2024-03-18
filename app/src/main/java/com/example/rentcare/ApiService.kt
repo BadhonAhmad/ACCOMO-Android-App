@@ -65,6 +65,10 @@ interface ApiService {
     fun GetSpecificUnit(
         @Query("flatname") flatname: String
     ):Call<List<UnitDetails>>
+    @GET("flatcode")
+    fun GetFlatCode(
+        @Query("flatname") flatname: String
+    ):Call<List<FlatCode>>
 
 
     @GET("rentedlist")

@@ -72,8 +72,8 @@ fun CreateFlat(navController: NavController) {
         modifier= Modifier.fillMaxSize()
     ){
         Text(
-            text = "Enter Flat's Info:",
-            color = Color.Blue,
+            text = "Enter Apartment's Info:",
+            color = Color.Blue,//shabaner boin kutubkhani
             fontSize = 30.sp,
             fontWeight = FontWeight.Bold,
             textAlign = TextAlign.Center,
@@ -158,7 +158,7 @@ fun CreateFlat(navController: NavController) {
             shape = RoundedCornerShape(15.dp)
         )
         Spacer(modifier = Modifier.height(25.dp))
-        CButton(text = "Create Flat", onClick = {
+        CButton(text = "Create Apartment", onClick = {
             // Create a RenterInfo object with the entered data
             val flatInfo = FlatInfo(
                 owner = femail,
@@ -188,8 +188,7 @@ fun CreateFlat(navController: NavController) {
                     showToast(toastContext,errorMessage)
                 }
             })
-        },
-            containerColor = Indigo
+        }
         )
         Row(
             modifier = Modifier
@@ -220,6 +219,7 @@ fun CreateFlat(navController: NavController) {
 private fun showToast(context: Context, message: String) {
     Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
 }
+
 @Preview(showSystemUi = true, showBackground = true)
 @Composable
 fun Pre() {

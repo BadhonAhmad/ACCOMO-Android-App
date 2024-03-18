@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -19,9 +20,13 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import com.example.rentcare.Components.CButton
+import com.example.rentcare.ui.theme.Indigo
 
 @Composable
 fun Welcome(
@@ -61,36 +66,47 @@ fun Welcome(
                 fontStyle = FontStyle.Italic
             )
         }
+        Spacer(modifier = Modifier.height(10.dp)) //Adds vertical space of 16 density-independent pixels (dp)
+
         Box(
             modifier = Modifier
                 .fillMaxWidth(),
             contentAlignment = Alignment.TopCenter
         ){
             Text(
-                text = "RENT CARE",
+                text = "ACCOMO",
                 fontSize = 60.sp,
                 color = Color.Black,
                 fontWeight = FontWeight.Bold
             )
         }
+        Spacer(modifier = Modifier.height(25.dp)) //Adds vertical space of 16 density-independent pixels (dp)
 
-        Text(text="We're thrilled to have you join our community for \n" +
-                "managing your rented residence. Let's simplify the world of renting and leasing together!",
-            fontSize = 15.sp
-        )
-        Spacer(modifier = Modifier.height(40.dp)) //Adds vertical space of 16 density-independent pixels (dp)
-        Button(
-            modifier = Modifier.fillMaxWidth().background(Color.White),
-            onClick = {
-                navController.navigate(route = Screen.Login.route)
-            }){
-            Text(text= "Get Started!")
+        Box(
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxWidth(),
+            contentAlignment = Alignment.Center
+        ) {
+            Text(
+                text = "We're thrilled to have you join our community for managing your rented residence. Let's simplify the world of renting and leasing together!",
+                fontSize = 20.sp
+            )
         }
+        Spacer(modifier = Modifier.height(50.dp)) //Adds vertical space of 16 density-independent pixels (dp)
+        CButton(text = "Get Started!", onClick = {
+            navController.navigate(Screen.Login.route) {
+                popUpTo(Screen.Login.route) {
+                    inclusive = true
+                }
+            }
+        })
     }
 }
 
-//@Composable
-//@Preview(showBackground = true, showSystemUi = true)
-//fun WelcomePreview(){
-//        Welcome(navController = rememberNavController())
-//}
+
+@Preview(showBackground = true, showSystemUi = true)
+@Composable
+fun WelcomePreview(){
+        Welcome(navController = rememberNavController())
+}

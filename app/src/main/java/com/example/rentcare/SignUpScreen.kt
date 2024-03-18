@@ -45,9 +45,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import coil.compose.rememberImagePainter
 import com.example.rentcare.Components.CButton
 import com.example.rentcare.ui.theme.Indigo
@@ -81,14 +83,15 @@ fun SignUpScreen(
    // var password by remember { mutableStateOf("") }
     //var con_password by remember { mutableStateOf("") }
     var nid = remember { mutableStateOf(TextFieldValue()) }
-    Surface(
-        modifier = Modifier.fillMaxSize(),
-    ) {
-        Box() {
+    Surface() {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 10.dp,bottom = 50.dp)
+        ) {
             Column(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 10.dp)
+                    .align(Alignment.Center)
             ) {
                 Text(
                     text = "Sign Up",
@@ -96,15 +99,17 @@ fun SignUpScreen(
                         fontSize = 30.sp,
                         fontFamily = FontFamily.SansSerif,
                         fontWeight = FontWeight(500),
-                        color = Indigo
+                        color = Color.Black
                     ),
                     modifier = Modifier.align(Alignment.CenterHorizontally)
                 )
-                //Spacer(modifier = Modifier.height(120.dp))
+
             }
         }
-        Spacer(modifier = Modifier.height(20.dp))
-        Box(){
+        Box(
+          modifier  = Modifier
+              .padding(top = 50.dp)
+        ) {
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier
@@ -113,7 +118,6 @@ fun SignUpScreen(
                         .padding(top = 50.dp)
                         .verticalScroll(rememberScrollState())
                 ) {
-
                     OutlinedTextField(
                         value = nam.value,
                         onValueChange = { nam.value = it },
@@ -157,7 +161,7 @@ fun SignUpScreen(
                             keyboardType = KeyboardType.Text,
                             imeAction = ImeAction.Next
                         )
-                        )
+                    )
                     OutlinedTextField(
                         value =mobile.value ,
                         onValueChange ={ mobile.value=it},
@@ -172,7 +176,7 @@ fun SignUpScreen(
                             keyboardType = KeyboardType.Text,
                             imeAction = ImeAction.Next
                         )
-                        )
+                    )
                     OutlinedTextField(
                         value =password.value ,
                         onValueChange ={ password.value=it},
@@ -203,7 +207,6 @@ fun SignUpScreen(
                             imeAction = ImeAction.Next
                         )
                     )
-
 
                     CButton(text = "Sign Up", onClick = {
                         // Create a RenterInfo object with the entered data
@@ -273,11 +276,11 @@ fun SignUpScreen(
 private fun showToast(context: Context, message: String) {
     Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
 }
-//@Preview(showSystemUi = ture,)
-//@Composable
-//fun SignUpScreenP(navController: NavController) {
-//    SignUpScreenP(navController = NavController())
-//}
+@Preview(showSystemUi = true, showBackground = true)
+@Composable
+fun SignUpScreenP() {
+    SignUpScreen(navController = rememberNavController())
+}
 
 
 

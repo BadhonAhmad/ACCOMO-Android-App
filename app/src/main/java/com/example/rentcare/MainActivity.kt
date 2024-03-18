@@ -19,6 +19,7 @@ class MainActivity : ComponentActivity() {
         var rentedFlats : RentedFlats ? = null
         var rentedList : List<RentedFlats> ?= emptyList()
         var billStatus : BillStatus ?= null
+        var flatCode  : FlatCode ? = null
       //var resultList: List<Getdata>?= null
       //var semester:String?=null
     }

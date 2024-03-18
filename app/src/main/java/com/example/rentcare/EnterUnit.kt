@@ -66,7 +66,7 @@ fun EnterUnit(navController: NavController) {
     ) {
         Text(
             modifier = Modifier.padding(top = 100.dp),
-            text = "Enter Your Rented Unit",
+            text = "Enter Rented Unit's Code",
             fontSize = 28.sp,
             color = Color.Black,
             fontWeight = FontWeight.Bold

@@ -82,7 +82,7 @@ fun FlatProfile(navController: NavController) {
                 imageVector = Icons.Default.ArrowBack, // Use the back arrow icon
                 contentDescription = null, // Content description can be null for decorative icons
                 modifier = Modifier
-                    .size(24.dp) // Set the size of the icon
+                    .size(30.dp) // Set the size of the icon
                     .clickable {
                         // Handle back arrow click action (e.g., navigate back)
                         navController.navigate(Screen.FindUnit.route) {
@@ -246,15 +246,22 @@ fun FlatProfile(navController: NavController) {
             dynamicText.value = if (isPaid) "Paid" else "Due"
         }
 
-        Text(
-            text = dynamicText.value,
-            modifier = Modifier.align(Alignment.CenterHorizontally),
-            style = TextStyle(
-                fontSize = 20.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color.Black
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
+                .background(color = Color.Yellow)
+        ) {
+            Text(
+                text = dynamicText.value,
+                modifier = Modifier.align(Alignment.Center),
+                style = TextStyle(
+                    fontSize = 30.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.Black
+                )
             )
-        )
+        }
         //find summary na thakle unsupported feature yr/mm/dd
         //aage dekhte hbe drive tool or gmail tool ,, qna from content, transliteration is accepted
         //unclear to skip taskid r prompt pashapashi likha jate duplicate na likha hoy
@@ -298,7 +305,7 @@ fun FlatProfile(navController: NavController) {
                     showToast(toastContext, errorMessage)
                 }
             },
-            containerColor = Indigo
+            containerColor = Color.Green
         )
 
     }

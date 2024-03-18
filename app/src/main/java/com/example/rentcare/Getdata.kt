@@ -57,3 +57,8 @@ data class BillStatus(
     var flatname : String,
     var billstatus: Int
 )
+
+data class FlatCode(
+    var flatname: String,
+    var code : String
+)
