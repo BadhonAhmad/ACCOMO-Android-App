@@ -20,7 +20,6 @@ fun SetUpNavGraph(
         composable(route = "Login_screen"){ Login(navController) }
         composable(route = "Signup_screen"){ SignUpScreen(navController) }
         composable(route = "profile"){ Profile(navController) }
-        composable(route = "notifications"){ Notifications(navController) }
         composable(route = "homepage"){ HomePage(navController) }
         composable(route = "yourunit"){ YourUnit(navController) }
         composable(route = "enterunit"){ EnterUnit(navController) }

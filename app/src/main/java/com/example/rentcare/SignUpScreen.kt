@@ -67,7 +67,8 @@ fun SignUpScreen(
     navController: NavController
 ) {
     val toastContext = LocalContext.current
-    val BASE_URL = "http://192.168.43.186:5001/"
+//    val BASE_URL = "http://192.168.43.186:5001/"
+    val BASE_URL = "http://10.213.36.97:5001/"
     val apiService: ApiService by lazy {
         Retrofit.Builder()
             .baseUrl(BASE_URL)
@@ -222,7 +223,9 @@ fun SignUpScreen(
                     apiService.InputRenterInfo(renterInfo).enqueue(object : Callback<Void> {
                         override fun onResponse(call: Call<Void>, response: Response<Void>) {
                             if (response.isSuccessful) {
-                                val BASE_URL = "http://192.168.43.186:5001/"
+//                                val BASE_URL = "http://192.168.43.186:5001/"
+                                val BASE_URL = "http://10.213.36.97:5001/"
+
                                 val apiService: ApiService by lazy {
                                     Retrofit.Builder()
                                         .baseUrl(BASE_URL)

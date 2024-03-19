@@ -53,7 +53,9 @@ fun FlatProfile(navController: NavController) {
     val notification = rememberSaveable{ mutableStateOf("") }
     val toastContext = LocalContext.current
     var billStatusText by rememberSaveable { mutableStateOf("") }
-    val BASE_URL = "http://192.168.43.186:5001/"
+//    val BASE_URL = "http://192.168.43.186:5001/"
+    val BASE_URL = "http://10.213.36.97:5001/"
+
     val apiService: ApiService by lazy {
         Retrofit.Builder()
             .baseUrl(BASE_URL)

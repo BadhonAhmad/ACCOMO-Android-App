@@ -49,7 +49,9 @@ import java.util.*
 fun HomePage(navController: NavController) {
     val toastContext = LocalContext.current
     var code by remember { mutableStateOf(TextFieldValue()) }
-    val BASE_URL = "http://192.168.43.186:5001/"
+//    val BASE_URL = "http://192.168.43.186:5001/"
+    val BASE_URL = "http://10.213.36.97:5001/"
+
     val apiService: ApiService by lazy {
         Retrofit.Builder()
             .baseUrl(BASE_URL)
@@ -171,8 +173,9 @@ fun HomePage(navController: NavController) {
                                                                 MainActivity.unitDetails =
                                                                     resultList.first()
                                                                 if (name.isNotEmpty()) {
-                                                                    val BASE_URL =
-                                                                        "http://192.168.43.186:5001/"
+//                                                                    val BASE_URL = "http://192.168.43.186:5001/"
+                                                                    val BASE_URL = "http://10.213.36.97:5001/"
+
                                                                     val apiService: ApiService by lazy {
                                                                         Retrofit.Builder()
                                                                             .baseUrl(BASE_URL)
