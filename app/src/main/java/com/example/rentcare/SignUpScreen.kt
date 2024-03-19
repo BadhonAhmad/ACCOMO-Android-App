@@ -80,7 +80,7 @@ fun SignUpScreen(
     var email = remember { mutableStateOf(TextFieldValue()) }
     var mobile = remember { mutableStateOf(TextFieldValue()) }
     var password = remember { mutableStateOf(TextFieldValue()) }
-   // var password by remember { mutableStateOf("") }
+    // var password by remember { mutableStateOf("") }
     //var con_password by remember { mutableStateOf("") }
     var nid = remember { mutableStateOf(TextFieldValue()) }
     Surface() {
@@ -107,168 +107,216 @@ fun SignUpScreen(
             }
         }
         Box(
-          modifier  = Modifier
-              .padding(top = 50.dp)
+            modifier  = Modifier
+                .padding(top = 50.dp)
         ) {
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(horizontal = 16.dp)
+                    .padding(top = 50.dp)
+                    .verticalScroll(rememberScrollState())
+            ) {
+                OutlinedTextField(
+                    value = nam.value,
+                    onValueChange = { nam.value = it },
+                    singleLine = true,
+                    label = { Text(text = "Enter your name") },
                     modifier = Modifier
-                        .fillMaxSize()
-                        .padding(horizontal = 16.dp)
-                        .padding(top = 50.dp)
-                        .verticalScroll(rememberScrollState())
-                ) {
-                    OutlinedTextField(
-                        value = nam.value,
-                        onValueChange = { nam.value = it },
-                        singleLine = true,
-                        label = { Text(text = "Enter your name") },
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(bottom = 5.dp, start = 10.dp, end = 10.dp),
-                        shape = RoundedCornerShape(15.dp),
-                        keyboardOptions = KeyboardOptions(
-                            keyboardType = KeyboardType.Text,
-                            imeAction = ImeAction.Next
-                        )
+                        .fillMaxWidth()
+                        .padding(bottom = 5.dp, start = 10.dp, end = 10.dp),
+                    shape = RoundedCornerShape(15.dp),
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Text,
+                        imeAction = ImeAction.Next
                     )
-                    OutlinedTextField(
-                        value =address.value ,
-                        onValueChange ={ address.value=it},
-                        singleLine = true,
-                        label = { Text(text = "Address") },
-                        //colors = TextFieldDefaults.colors(),
-                        modifier= Modifier
-                            .fillMaxWidth()
-                            .padding(bottom = 5.dp, start = 10.dp, end = 10.dp),
-                        shape = RoundedCornerShape(15.dp),
-                        keyboardOptions = KeyboardOptions(
-                            keyboardType = KeyboardType.Text,
-                            imeAction = ImeAction.Next
-                        )
+                )
+                OutlinedTextField(
+                    value =address.value ,
+                    onValueChange ={ address.value=it},
+                    singleLine = true,
+                    label = { Text(text = "Address") },
+                    //colors = TextFieldDefaults.colors(),
+                    modifier= Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 5.dp, start = 10.dp, end = 10.dp),
+                    shape = RoundedCornerShape(15.dp),
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Text,
+                        imeAction = ImeAction.Next
                     )
-                    OutlinedTextField(
-                        value =email.value ,
-                        onValueChange ={ email.value=it},
-                        singleLine = true,
-                        label = { Text(text = "Email") },
-                        //colors = TextFieldDefaults.colors(),
-                        modifier= Modifier
-                            .fillMaxWidth()
-                            .padding(bottom = 5.dp, start = 10.dp, end = 10.dp),
-                        shape = RoundedCornerShape(15.dp),
-                        keyboardOptions = KeyboardOptions(
-                            keyboardType = KeyboardType.Text,
-                            imeAction = ImeAction.Next
-                        )
+                )
+                OutlinedTextField(
+                    value =email.value ,
+                    onValueChange ={ email.value=it},
+                    singleLine = true,
+                    label = { Text(text = "Email") },
+                    //colors = TextFieldDefaults.colors(),
+                    modifier= Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 5.dp, start = 10.dp, end = 10.dp),
+                    shape = RoundedCornerShape(15.dp),
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Text,
+                        imeAction = ImeAction.Next
                     )
-                    OutlinedTextField(
-                        value =mobile.value ,
-                        onValueChange ={ mobile.value=it},
-                        singleLine = true,
-                        label = { Text(text = "mobile") },
-                        //colors = TextFieldDefaults.colors(),
-                        modifier= Modifier
-                            .fillMaxWidth()
-                            .padding(bottom = 5.dp, start = 10.dp, end = 10.dp),
-                        shape = RoundedCornerShape(15.dp),
-                        keyboardOptions = KeyboardOptions(
-                            keyboardType = KeyboardType.Text,
-                            imeAction = ImeAction.Next
-                        )
+                )
+                OutlinedTextField(
+                    value =mobile.value ,
+                    onValueChange ={ mobile.value=it},
+                    singleLine = true,
+                    label = { Text(text = "mobile") },
+                    //colors = TextFieldDefaults.colors(),
+                    modifier= Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 5.dp, start = 10.dp, end = 10.dp),
+                    shape = RoundedCornerShape(15.dp),
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Text,
+                        imeAction = ImeAction.Next
                     )
-                    OutlinedTextField(
-                        value =password.value ,
-                        onValueChange ={ password.value=it},
-                        singleLine = true,
-                        label = { Text(text = "password") },
-                        //colors = TextFieldDefaults.colors(),
-                        modifier= Modifier
-                            .fillMaxWidth()
-                            .padding(bottom = 5.dp, start = 10.dp, end = 10.dp),
-                        shape = RoundedCornerShape(15.dp),
-                        keyboardOptions = KeyboardOptions(
-                            keyboardType = KeyboardType.Text,
-                            imeAction = ImeAction.Next
-                        )
+                )
+                OutlinedTextField(
+                    value =password.value ,
+                    onValueChange ={ password.value=it},
+                    singleLine = true,
+                    label = { Text(text = "password") },
+                    //colors = TextFieldDefaults.colors(),
+                    modifier= Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 5.dp, start = 10.dp, end = 10.dp),
+                    shape = RoundedCornerShape(15.dp),
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Text,
+                        imeAction = ImeAction.Next
                     )
-                    OutlinedTextField(
-                        value =nid.value ,
-                        onValueChange ={ nid.value=it},
-                        singleLine = true,
-                        label = { Text(text = "NID number") },
-                        //colors = TextFieldDefaults.colors(),
-                        modifier= Modifier
-                            .fillMaxWidth()
-                            .padding(bottom = 5.dp, start = 10.dp, end = 10.dp),
-                        shape = RoundedCornerShape(15.dp),
-                        keyboardOptions = KeyboardOptions(
-                            keyboardType = KeyboardType.Text,
-                            imeAction = ImeAction.Next
-                        )
+                )
+                OutlinedTextField(
+                    value =nid.value ,
+                    onValueChange ={ nid.value=it},
+                    singleLine = true,
+                    label = { Text(text = "NID number") },
+                    //colors = TextFieldDefaults.colors(),
+                    modifier= Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 5.dp, start = 10.dp, end = 10.dp),
+                    shape = RoundedCornerShape(15.dp),
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Text,
+                        imeAction = ImeAction.Next
                     )
+                )
 
-                    CButton(text = "Sign Up", onClick = {
-                        // Create a RenterInfo object with the entered data
-                        val renterInfo = RenterInfo(
-                            name = nam.value.text,
-                            address = address.value.text,
-                            email = email.value.text,
-                            mobile = mobile.value.text,
-                            password = password.value.text,
-                            nid =nid.value.text
-                        )
-                        // Make the PUT request
-                        apiService.InputRenterInfo(renterInfo).enqueue(object : Callback<Void> {
-                            override fun onResponse(call: Call<Void>, response: Response<Void>) {
-                                if (response.isSuccessful) {
-                                    navController.navigate(Screen.HomePage.route){
-                                        popUpTo(Screen.HomePage.route){
-                                            inclusive = true
+                CButton(text = "Sign Up", onClick = {
+                    // Create a RenterInfo object with the entered data
+                    val renterInfo = RenterInfo(
+                        name = nam.value.text,
+                        address = address.value.text,
+                        email = email.value.text,
+                        mobile = mobile.value.text,
+                        password = password.value.text,
+                        nid =nid.value.text
+                    )
+                    // Make the PUT request
+                    apiService.InputRenterInfo(renterInfo).enqueue(object : Callback<Void> {
+                        override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                            if (response.isSuccessful) {
+                                val BASE_URL = "http://192.168.43.186:5001/"
+                                val apiService: ApiService by lazy {
+                                    Retrofit.Builder()
+                                        .baseUrl(BASE_URL)
+                                        .addConverterFactory(GsonConverterFactory.create())
+                                        .build()
+                                        .create(ApiService::class.java)
+                                }
+                                val getStudentInfoCall: Call<List<RenterInfo>> =
+                                    apiService.GetrenterInfo(email.value.text, password.value.text)
+
+                                getStudentInfoCall.enqueue(object : Callback<List<RenterInfo>> {
+                                    override fun onResponse(
+                                        call: Call<List<RenterInfo>>,
+                                        response: Response<List<RenterInfo>>
+                                    ) {
+                                        if (response.isSuccessful) {
+                                            val resultList: List<RenterInfo>? = response.body()
+                                            if (resultList != null && resultList.isNotEmpty()) {
+                                                MainActivity.renterInfo = resultList.first()
+
+                                                navController.navigate(Screen.HomePage.route) {
+                                                    popUpTo(Screen.HomePage.route) {
+                                                        inclusive = true
+                                                    }
+                                                }
+                                            } else {
+                                                // Handle the case where the response body is empty or null
+                                            }
+                                        } else {
+                                            Toast.makeText(
+                                                toastContext,
+                                                "API call failed. Code: ${response.code()}",
+                                                Toast.LENGTH_SHORT
+                                            ).show()
                                         }
                                     }
-                                } else {
-                                    // Handle error
-                                    val errorMessage = "Error: ${response.code()}"
-                                    // Show error message to the user
-                                    showToast(toastContext,errorMessage)
-                                }
-                            }
-
-                            override fun onFailure(call: Call<Void>, t: Throwable) {
-                                val errorMessage = "Failed to update: ${t.localizedMessage}"
+                                    override fun onFailure(
+                                        call: Call<List<RenterInfo>>,
+                                        t: Throwable
+                                    ) {
+                                        Toast.makeText(
+                                            toastContext,
+                                            "Network failure. Error: ${t.message}",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    }
+                                })
+//                                navController.navigate(Screen.HomePage.route){
+//                                    popUpTo(Screen.HomePage.route){
+//                                        inclusive = true
+//                                    }
+//                                }
+                            } else {
+                                // Handle error
+                                val errorMessage = "Error: ${response.code()}"
                                 // Show error message to the user
                                 showToast(toastContext,errorMessage)
                             }
-                        })
+                        }
 
-                    },
-                        containerColor = Indigo
-                    )
+                        override fun onFailure(call: Call<Void>, t: Throwable) {
+                            val errorMessage = "Failed to update: ${t.localizedMessage}"
+                            // Show error message to the user
+                            showToast(toastContext,errorMessage)
+                        }
+                    })
 
-                    Row(modifier = Modifier.padding(top = 12.dp,bottom = 40.dp)) {
-                        Text("Already have an account?",
-                            style = TextStyle(
-                                fontSize = 18.sp,
-                                color = Color.Black
-                            )
+                },
+                    containerColor = Indigo
+                )
+
+                Row(modifier = Modifier.padding(top = 12.dp,bottom = 40.dp)) {
+                    Text("Already have an account?",
+                        style = TextStyle(
+                            fontSize = 18.sp,
+                            color = Color.Black
                         )
-                        Text("Sign in",
-                            style= TextStyle(
-                                fontSize = 18.sp,
-                                fontWeight = FontWeight(800),
-                                color = Color.Black
-                            ),
-                            modifier = Modifier.clickable {
-                                navController.navigate(Screen.Login.route){
-                                    popUpTo(Screen.Login.route){
-                                        inclusive = true
-                                    }
+                    )
+                    Text("Sign in",
+                        style= TextStyle(
+                            fontSize = 18.sp,
+                            fontWeight = FontWeight(800),
+                            color = Color.Black
+                        ),
+                        modifier = Modifier.clickable {
+                            navController.navigate(Screen.Login.route){
+                                popUpTo(Screen.Login.route){
+                                    inclusive = true
                                 }
                             }
-                        )
-                    }
+                        }
+                    )
                 }
+            }
         }
     }
 }
@@ -281,6 +329,3 @@ private fun showToast(context: Context, message: String) {
 fun SignUpScreenP() {
     SignUpScreen(navController = rememberNavController())
 }
-
-
-

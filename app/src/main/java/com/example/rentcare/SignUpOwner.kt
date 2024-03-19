@@ -225,12 +225,60 @@ fun SignUpOwner(
                                 ownerInfo.mobile = mobile.value.text
                                 ownerInfo.bkash = bkash.value.text
                                 ownerInfo.address = address.value.text
-
-                                navController.navigate(Screen.FindUnit.route){
-                                    popUpTo(Screen.FindUnit.route){
-                                        inclusive = true
-                                    }
+                                val BASE_URL = "http://192.168.43.186:5001/"
+                                val apiService: ApiService by lazy {
+                                    Retrofit.Builder()
+                                        .baseUrl(BASE_URL)
+                                        .addConverterFactory(GsonConverterFactory.create())
+                                        .build()
+                                        .create(ApiService::class.java)
                                 }
+                                val getStudentInfoCall: Call<List<OwnerInfo>> =
+                                    apiService.GetOwnerInfo(email.value.text,password.value.text)
+
+
+                                getStudentInfoCall.enqueue(object : Callback<List<OwnerInfo>> {
+                                    override fun onResponse(
+                                        call: Call<List<OwnerInfo>>,
+                                        response: Response<List<OwnerInfo>>
+                                    ) {
+                                        if (response.isSuccessful) {
+                                            val resultList: List<OwnerInfo> ?= response.body()
+                                            if (resultList != null && resultList.isNotEmpty()) {
+                                                MainActivity.ownerInfo = resultList.first()
+                                                navController.navigate(Screen.FindUnit.route){
+                                                    popUpTo(Screen.FindUnit.route){
+                                                        inclusive = true
+                                                    }
+                                                }
+                                            } else {
+                                                // Handle the case where the response body is empty or null
+                                            }
+                                        } else {
+                                            Toast.makeText(
+                                                toastContext,
+                                                "API call failed. Code: ${response.code()}",
+                                                Toast.LENGTH_SHORT
+                                            ).show()
+                                        }
+                                    }
+
+                                    override fun onFailure(
+                                        call: Call<List<OwnerInfo>>,
+                                        t: Throwable
+                                    ) {
+                                        Toast.makeText(
+                                            toastContext,
+                                            "Network failure. Error: ${t.message}",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    }
+                                })
+//                                navController.navigate(Screen.FindUnit.route){
+//                                    popUpTo(Screen.FindUnit.route){
+//                                        inclusive = true
+//                                    }
+//                                }
                             } else {
                                 // Handle error
                                 val errorMessage = "Error: ${response.code()}"

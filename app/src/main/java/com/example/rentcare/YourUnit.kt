@@ -267,20 +267,23 @@ fun YourUnit(navController: NavController) {
         )
         {
             Text(
-                text = "Due Clear?",
+                text = "Complain?",
                 color = Indigo,
                 fontSize = 28.sp,
                 fontWeight = FontWeight.Bold,
                 textAlign = TextAlign.Center,
                 modifier = Modifier.padding(
                     start = 16.dp,
-                    end = 16.dp,
                     top = 16.dp,
                     bottom = 8.dp
                 )
             )
-            CButton(text = "Notify Owner", onClick = {
-
+            CButton(text = "NotifyOwner", onClick = {
+                navController.navigate(Screen.NotifyOwner.route) {
+                    popUpTo(Screen.NotifyOwner.route) {
+                        inclusive = true
+                    }
+                }
             },
                 containerColor = Color.DarkGray
             )

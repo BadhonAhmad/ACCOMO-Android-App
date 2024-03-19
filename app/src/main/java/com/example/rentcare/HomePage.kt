@@ -137,7 +137,7 @@ fun HomePage(navController: NavController) {
                                 var name = unit.flatname
 
                                 Text(
-                                    text = "${ind + 1}: $name",
+                                    text = " ${ind + 1}: $name",
                                     color = Color.Black,
                                     fontWeight = FontWeight.Bold,
                                     fontSize = 25.sp,
@@ -263,7 +263,7 @@ fun HomePage(navController: NavController) {
                                                         Log.e(
                                                             "ClickEvent",
                                                             "Network failure. Error: ${t.message}",
-                                                            t
+
                                                         )
                                                         // Show error message to the user
                                                         Toast.makeText(
@@ -278,12 +278,10 @@ fun HomePage(navController: NavController) {
                                             }
                                         }
                                 )
-
                             }
                         }
                         FloatingActionButton(
                             onClick = {
-                                //EnterUnit
                                 navController.navigate(Screen.EnterUnit.route) {
                                     popUpTo(Screen.EnterUnit.route) {
                                         inclusive = true

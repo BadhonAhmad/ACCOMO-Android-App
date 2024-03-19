@@ -70,13 +70,13 @@ fun FlatProfile(navController: NavController) {
         modifier = Modifier
             .verticalScroll(rememberScrollState())
             .padding(8.dp)
-    ){
+    ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(8.dp),
             horizontalArrangement = Arrangement.SpaceBetween
-        ){
+        ) {
 
             Icon(
                 imageVector = Icons.Default.ArrowBack, // Use the back arrow icon
@@ -307,7 +307,32 @@ fun FlatProfile(navController: NavController) {
             },
             containerColor = Color.Green
         )
-
+        Row(
+        )
+        {
+            Text(
+                text = "Any Notice?",
+                color = Indigo,
+                fontSize = 28.sp,
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.padding(
+                    start = 16.dp,
+                    top = 16.dp,
+                    bottom = 8.dp
+                )
+            )
+            CButton(
+                text = "NotifyTenant", onClick = {
+                    navController.navigate(Screen.NotifyOwner.route) {
+                        popUpTo(Screen.NotifyOwner.route) {
+                            inclusive = true
+                        }
+                    }
+                },
+                containerColor = Color.DarkGray
+            )
+        }
     }
 }
 

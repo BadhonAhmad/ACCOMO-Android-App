@@ -32,6 +32,7 @@ fun SetUpNavGraph(
         composable(route = "findunit"){ FindUnit(navController )}
         composable(route = "confrimunit"){ ConfirmUnit(navController) }
         composable(route = "flatcode"){ FlatCode(navController)}
+        composable(route = "notifyowner"){ NotifyOwner(navController) }
 
     }
 }
