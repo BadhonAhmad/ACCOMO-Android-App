@@ -39,7 +39,6 @@ fun Welcome(
     Column(modifier = Modifier
         .fillMaxSize()
         .background(Color.White)
-
     ) {
         Box(
             contentAlignment = Alignment.TopCenter
@@ -67,7 +66,6 @@ fun Welcome(
             )
         }
         Spacer(modifier = Modifier.height(10.dp)) //Adds vertical space of 16 density-independent pixels (dp)
-
         Box(
             modifier = Modifier
                 .fillMaxWidth(),
@@ -95,8 +93,8 @@ fun Welcome(
         }
         Spacer(modifier = Modifier.height(50.dp)) //Adds vertical space of 16 density-independent pixels (dp)
         CButton(text = "Get Started!", onClick = {
-            navController.navigate(Screen.Login.route) {
-                popUpTo(Screen.Login.route) {
+            navController.navigate(Screen.Otp.route) {
+                popUpTo(Screen.Otp.route) {
                     inclusive = true
                 }
             }

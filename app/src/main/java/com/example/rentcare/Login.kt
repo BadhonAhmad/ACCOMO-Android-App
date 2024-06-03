@@ -125,8 +125,8 @@ fun Login(
 
             CButton(text = "Tenant", onClick = {
                 if (email.text.isNotEmpty() && password.text.isNotEmpty()) {
-//                    val BASE_URL = "http://192.168.43.186:5001/"
-                    val BASE_URL = "http://10.213.36.97:5001/"
+                    val BASE_URL = "http://192.168.43.186:5001/"
+//                    val BASE_URL = "http://10.213.36.97:5001/"
 
                     val apiService: ApiService by lazy {
                         Retrofit.Builder()
@@ -230,8 +230,8 @@ fun Login(
             )
             CButton(text = "Owner", onClick = {
                 if (email.text.isNotEmpty() && password.text.isNotEmpty()){
-//                    val BASE_URL = "http://192.168.43.186:5001/"
-                    val BASE_URL = "http://10.213.36.97:5001/"
+                    val BASE_URL = "http://192.168.43.186:5001/"
+//                    val BASE_URL = "http://10.213.36.97:5001/"
 
                     val apiService: ApiService by lazy {
                         Retrofit.Builder()

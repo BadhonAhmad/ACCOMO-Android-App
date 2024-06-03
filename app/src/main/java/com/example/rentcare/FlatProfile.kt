@@ -264,9 +264,7 @@ fun FlatProfile(navController: NavController) {
                 )
             )
         }
-        //find summary na thakle unsupported feature yr/mm/dd
-        //aage dekhte hbe drive tool or gmail tool ,, qna from content, transliteration is accepted
-        //unclear to skip taskid r prompt pashapashi likha jate duplicate na likha hoy
+
 
         CButton(
             text = "Mark As Paid",

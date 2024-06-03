@@ -67,8 +67,8 @@ fun SignUpOwner(
     navController: NavController
 ) {
     val toastContext = LocalContext.current
-//    val BASE_URL = "http://192.168.43.186:5001/"
-    val BASE_URL = "http://10.213.36.97:5001/"
+    val BASE_URL = "http://192.168.43.186:5001/"
+//    val BASE_URL = "http://10.213.36.97:5001/"
     val apiService: ApiService by lazy {
         Retrofit.Builder()
             .baseUrl(BASE_URL)
@@ -226,8 +226,8 @@ fun SignUpOwner(
                                 ownerInfo.mobile = mobile.value.text
                                 ownerInfo.bkash = bkash.value.text
                                 ownerInfo.address = address.value.text
-//                                val BASE_URL = "http://192.168.43.186:5001/"
-                                val BASE_URL = "http://10.213.36.97:5001/"
+                                val BASE_URL = "http://192.168.43.186:5001/"
+//                                val BASE_URL = "http://10.213.36.97:5001/"
 
                                 val apiService: ApiService by lazy {
                                     Retrofit.Builder()

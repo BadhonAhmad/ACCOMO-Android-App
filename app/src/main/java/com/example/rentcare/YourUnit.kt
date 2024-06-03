@@ -55,7 +55,6 @@ fun YourUnit(navController: NavController) {
         Toast.makeText(LocalContext.current,notification.value,Toast.LENGTH_LONG).show()
         notification.value = ""
     }
-
     Column(
         modifier = Modifier
             .verticalScroll(rememberScrollState())
@@ -257,7 +256,6 @@ fun YourUnit(navController: NavController) {
             )
         }
 
-
         CButton(text = "Pay Now", onClick = {
 
         },
@@ -291,8 +289,6 @@ fun YourUnit(navController: NavController) {
         // Spacer(modifier = Modifier.height(20.dp))
     }
 }
-
-
 
 @Preview(showSystemUi = true, showBackground = true)
 @Composable

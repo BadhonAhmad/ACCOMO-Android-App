@@ -164,8 +164,8 @@ fun FindUnit(navController: NavController) {
             text = "Find Unit",
             onClick = {
                 if (fname.text.isNotEmpty()) {
-//                    val BASE_URL = "http://192.168.43.186:5001/"
-                    val BASE_URL = "http://10.213.36.97:5001/"
+                   val BASE_URL = "http://192.168.43.186:5001/"
+//                   val BASE_URL = "http://10.213.36.97:5001/"
 
                     val apiService: ApiService by lazy {
                         Retrofit.Builder()
@@ -188,8 +188,8 @@ fun FindUnit(navController: NavController) {
                                 if (resultList != null && resultList.isNotEmpty()) {
                                     MainActivity.rentedFlats = resultList.first()
                                     if (fname.text.isNotEmpty()){
-//                                        val BASE_URL = "http://192.168.43.186:5001/"
-                                        val BASE_URL = "http://10.213.36.97:5001/"
+                                        val BASE_URL = "http://192.168.43.186:5001/"
+//                                        val BASE_URL = "http://10.213.36.97:5001/"
 
                                         val apiService: ApiService by lazy {
                                             Retrofit.Builder()
@@ -305,8 +305,8 @@ fun FindUnit(navController: NavController) {
             text = "Get Code",
             onClick = {
                 if (ffname.text.isNotEmpty() ){
-//                    val BASE_URL = "http://192.168.43.186:5001/"
-                    val BASE_URL = "http://10.213.36.97:5001/"
+                    val BASE_URL = "http://192.168.43.186:5001/"
+//                    val BASE_URL = "http://10.213.36.97:5001/"
 
                     val apiService: ApiService by lazy {
                         Retrofit.Builder()

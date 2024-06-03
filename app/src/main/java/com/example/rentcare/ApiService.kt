@@ -1,5 +1,15 @@
 package com.example.rentcare
 
+import com.example.rentcare.Data.otpRequest.ApiResponse
+import com.example.rentcare.Data.otpRequest.RequestParameters
+import com.example.rentcare.Data.otpVerify.OtpVerifyRespone
+import com.example.rentcare.Data.otpVerify.VerifyParameters
+import com.example.rentcare.Data.subscribe.SubscribeRequestParameters
+import com.example.rentcare.Data.subscribe.SubscribeResponse
+import com.example.rentcare.Data.subscription.StatusResponse
+import com.example.rentcare.Data.subscription.VerifyParametersStatus
+import com.example.rentcare.Data.unsubscribe.UnsubscribeRequestParameters
+import com.example.rentcare.Data.unsubscribe.UnsubscribeResponse
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -10,10 +20,29 @@ import retrofit2.http.Query
 
 interface ApiService {
     // Define a function for the PUT operation
+
+    @POST("nazmul/subscription/otp/request")
+    fun requestOtp(@Body requestParameters: RequestParameters): Call<ApiResponse>
+
+    @POST("nazmul/subscription/otp/verify")
+    fun verifyOtp(@Body verifyParameters: VerifyParameters): Call<OtpVerifyRespone>
+
+    @POST("nazmul/subscription/status ")
+    fun verifySubscription(@Body verifyParametersStatus: VerifyParametersStatus): Call<StatusResponse>
+
+    @POST("nazmul/subscription/subscribe ")
+    fun subscribe(@Body subscribeRequestParameters: SubscribeRequestParameters): Call<SubscribeResponse>
+
+    @POST("nazmul/subscription/unsubscribe ")
+    fun unsubscribe(@Body unsubscribeRequestParameters: UnsubscribeRequestParameters): Call<UnsubscribeResponse>
+
+
     @POST("renter")
     fun InputRenterInfo(
         @Body renterInfo: RenterInfo // Request body containing updated RenterInfo
     ): Call<Void> // Call object to handle the response
+
+
 
     @POST("owner")
     fun InputOwnerInfo(
@@ -69,7 +98,6 @@ interface ApiService {
     fun GetFlatCode(
         @Query("flatname") flatname: String
     ):Call<List<FlatCode>>
-
 
     @GET("rentedlist")
     fun GetRentedList(
