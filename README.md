@@ -129,4 +129,4 @@ git clone https://github.com/yourusername/ACCOMO.git
 **Nobel Ahmad Badhon**  
 📧 ahmadbadhon28@gmail.com  
 🌐 GitHub: [BadhonAhmad](https://github.com/BadhonAhmad)  
-💼 LinkedIn : [Badhon Ahmad]([https://github.com/BadhonAhmad](https://www.linkedin.com/in/badhon-ahmad-5a5894225/) 
+💼 LinkedIn : [Badhon Ahmad](https://www.linkedin.com/in/badhon-ahmad-5a5894225/) 
